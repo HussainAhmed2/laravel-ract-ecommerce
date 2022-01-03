@@ -1,0 +1,82 @@
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import AdminLogin from "../pages/Admin/Auth/AdminLogin";
+import AdminRegister from "../pages/Admin/Auth/AdminRegister";
+import Dashboard from "../pages/Admin/Dashboard";
+import Login from "../pages/Website/Auth/Login";
+import Register from "../pages/Website/Auth/Register";
+import Cart from "../pages/Website/Cart";
+import CheckOut from "../pages/Website/CheckOut";
+import Home from "../pages/Website/Home";
+import ProductDetails from "../pages/Website/ProductDetails";
+import Products from "../pages/Website/Products";
+
+function Main() {
+    let any_dir = process.env.MIX_SUB_DIR || "";
+    let app = process.env.MIX_APP_URL || "";
+    console.log(app + "Admin/Dashbaord");
+
+    return (
+        <>
+            <Router>
+                <Switch>
+                    <Route
+                        exact
+                        path={"/" + any_dir + "Login"}
+                        component={Login}
+                    />
+                    <Route
+                        exact
+                        path={"/" + any_dir + "Register"}
+                        component={Register}
+                    />
+
+                    <Route exact path={"/" + any_dir} component={Home} />
+                    <Route path={"/" + any_dir + "Home"} component={Home} />
+                    <Route
+                        path={"/" + any_dir + "Products"}
+                        component={Products}
+                    />
+                    <Route
+                        path={"/" + any_dir + "ProductDetails"}
+                        component={ProductDetails}
+                    />
+
+                    <Route path={"/" + any_dir + "Cart"} component={Cart} />
+                    <Route
+                        path={"/" + any_dir + "Checkout"}
+                        component={CheckOut}
+                    />
+
+                    {/* <Route
+                            path={"/" + any_dir + "Show/:id"}
+                            component={Show}
+                        /> */}
+
+                    <Route
+                        exact
+                        path={"/" + any_dir + "Admin/Dashboard"}
+                        component={Dashboard}
+                    />
+                    <Route
+                        exact
+                        path={"/" + any_dir + "Admin/Login"}
+                        component={AdminLogin}
+                    />
+                    <Route
+                        exact
+                        path={"/" + any_dir + "Admin/Register"}
+                        component={AdminRegister}
+                    />
+                </Switch>
+            </Router>
+        </>
+    );
+}
+
+export default Main;
+
+if (document.getElementById("main")) {
+    ReactDOM.render(<Main />, document.getElementById("main"));
+}
