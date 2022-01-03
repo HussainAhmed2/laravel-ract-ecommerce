@@ -19,7 +19,14 @@ Route::get( '/Admin/{path?}', function(){
 
     return view( 'admin' );
 } )
-->where('Admin/path', '^((?!api).)*$'); /*except api */
+->where('admin/path', '^((?!api).)*$'); /*except api */
+
+
+Route::get( '/admin/{path?}', function(){
+
+    return view( 'admin' );
+} )
+->where('Admin/path', '^((?!api).)*$');
 
 Route::get( '/{path?}', function(){
 

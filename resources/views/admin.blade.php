@@ -6,6 +6,12 @@
 
         <title>Laravel React App</title>
 
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/feather/feather.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/ti-icons/css/themify-icons.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/css/vendor.bundle.base.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/css/vertical-layout-light/style.css')}}">
+        {{-- <link href="{{asset('/public/css/app.css')}}" rel="stylesheet"> --}}
+{{--
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/public/AdminAssets/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="{{url('/')}}/public/AdminAssets/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
@@ -32,39 +38,39 @@
     <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/select2/select2.min.css')}}">
     <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/perfect-scrollbar/css/perfect-scrollbar.css')}}">
-    <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/feather/feather.css')}}">
-    <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/ti-icons/css/themify-icons.css')}}">
+
     <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/bar-rating/themes/fontawesome-stars-o.css')}}">
-    <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/css/vendor.bundle.base.css')}}">
-    <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/mdi/css/materialdesignicons.min.css')}}">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css"> --}}
+
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-  
+
 
                 <!-- Template Stylesheet -->
-            
 
-        
-        <link href="{{asset('/public/css/app.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="{{url('/public/AdminAssets/css/vertical-layout-light/style.css')}}">
+
+
+
+        {{-- <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/mdi/css/materialdesignicons.min.css')}}"> --}}
         <!-- Styles -->
           </head>
-    
+
 <body>
 
-<div class="container-scroller">
+
        <div id="main"></div>
-</div>
-       
+
+
 <script src="{{url('/public/AdminAssets/vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{url('/public/AdminAssets/vendors/chart.js/Chart.min.js')}}"></script>
+
     <script src="{{url('/public/AdminAssets/vendors/select2/select2.min.js')}}"></script>
     <script src="{{url('/public/AdminAssets/vendors/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{url('/public/AdminAssets/vendors/perfect-scrollbar/dist/perfect-scrollbar.js')}}"></script>
@@ -77,11 +83,10 @@
     <script src="{{url('/public/AdminAssets/js/todolist.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/chart.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/select2.js')}}"></script>
-    <script src="//unpkg.com/axios/dist/axios.min.js"></script>
     <script src="//code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="{{url('/public/AdminAssets/js/main.js?ver=' . time())}}"></script>
+    <script src="{{url('/public/AdminAssets/js/dashboard.js')}}"></script>
     <script type="application/javascript" src="{{url('/public/js/app.js')}}"></script>
-       
+
 </body>
 </html>
- 
