@@ -9,6 +9,9 @@
         <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/feather/feather.css')}}">
         <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/ti-icons/css/themify-icons.css')}}">
         <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/css/vendor.bundle.base.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/quill/quill.snow.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/simplemde/simplemde.min.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
         <link rel="stylesheet" href="{{url('/public/AdminAssets/css/vertical-layout-light/style.css')}}">
         {{-- <link href="{{asset('/public/css/app.css')}}" rel="stylesheet"> --}}
 {{--
@@ -65,6 +68,8 @@
 
 
 <script src="{{url('/public/AdminAssets/vendors/js/vendor.bundle.base.js')}}"></script>
+<script src="{{url('/public/AdminAssets/vendors/datatables.net/jquery.dataTables.js')}}"></script>
+<script src="{{url('/public/AdminAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
@@ -76,6 +81,7 @@
     <script src="{{url('/public/AdminAssets/vendors/perfect-scrollbar/dist/perfect-scrollbar.js')}}"></script>
     <script src="{{url('/public/AdminAssets/vendors/progressbar.js/progressbar.min.js')}}"></script>
     <script src="{{url('/public/AdminAssets/vendors/bar-rating/jquery.barrating.min.js')}}"></script>
+    <script src="{{url('/public/AdminAssets/vendors/tinymce/tinymce.min.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/off-canvas.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/hoverable-collapse.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/template.js')}}"></script>
@@ -83,9 +89,11 @@
     <script src="{{url('/public/AdminAssets/js/todolist.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/chart.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/select2.js')}}"></script>
+    <script src="{{url('/public/AdminAssets/js/editorDemo.js')}}"></script>
     <script src="//code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="{{url('/public/AdminAssets/js/main.js?ver=' . time())}}"></script>
     <script src="{{url('/public/AdminAssets/js/dashboard.js')}}"></script>
+
     <script type="application/javascript" src="{{url('/public/js/app.js')}}"></script>
 
 </body>

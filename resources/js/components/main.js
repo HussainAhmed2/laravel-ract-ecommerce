@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AdminLogin from "../pages/Admin/Auth/AdminLogin";
 import AdminRegister from "../pages/Admin/Auth/AdminRegister";
 import Dashboard from "../pages/Admin/Dashboard";
+import CreateProduct from "../pages/Admin/Products/CreateProduct";
+import ProductsList from "../pages/Admin/Products/ProductsList";
 import Login from "../pages/Website/Auth/Login";
 import Register from "../pages/Website/Auth/Register";
 import Cart from "../pages/Website/Cart";
@@ -56,18 +58,28 @@ function Main() {
 
                     <Route
                         exact
-                        path={"/" + any_dir + "Admin/Dashboard"}
+                        path={"/" + any_dir + "admin/Dashboard"}
                         component={Dashboard}
                     />
                     <Route
                         exact
-                        path={"/" + any_dir + "Admin/Login"}
+                        path={"/" + any_dir + "admin/Login"}
                         component={AdminLogin}
                     />
                     <Route
                         exact
-                        path={"/" + any_dir + "Admin/Register"}
+                        path={"/" + any_dir + "admin/Register"}
                         component={AdminRegister}
+                    />
+                     <Route
+                        exact
+                        path={"/" + any_dir + "admin/ProductsList"}
+                        component={ProductsList}
+                    />
+                     <Route
+                        exact
+                        path={"/" + any_dir + "admin/CreateProduct"}
+                        component={CreateProduct}
                     />
                 </Switch>
             </Router>
