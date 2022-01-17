@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/simplemde/simplemde.min.css')}}">
         <link rel="stylesheet" href="{{url('/public/AdminAssets/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
         <link rel="stylesheet" href="{{url('/public/AdminAssets/css/vertical-layout-light/style.css')}}">
+        <link rel="stylesheet" href="{{url('/public/AdminAssets/css/CustomStyles.css')}}">
         {{-- <link href="{{asset('/public/css/app.css')}}" rel="stylesheet"> --}}
 {{--
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
