@@ -5319,7 +5319,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Website_ProductDetails__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../pages/Website/ProductDetails */ "./resources/js/pages/Website/ProductDetails.jsx");
 /* harmony import */ var _pages_Website_Products__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../pages/Website/Products */ "./resources/js/pages/Website/Products.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
@@ -5340,8 +5339,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Main() {
-  var any_dir = "laravel-react-ecommerce/" || 0;
-  var app = process.env.MIX_APP_URL || "";
+  var any_dir = "EcommerceApp/" || 0;
+  var app = "http://localhost:2124/EcommerceApp/" || 0;
   console.log(app + "Admin/Dashbaord");
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_14__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.BrowserRouter, {
@@ -5420,14 +5419,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var AdminLogin = function AdminLogin() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "container-fluid page-body-wrapper full-page-wrapper",
@@ -5611,7 +5609,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Widgets_NavBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Widgets/NavBar */ "./resources/js/pages/Admin/Components/Widgets/NavBar.jsx");
 /* harmony import */ var _Widgets_SideBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Widgets/SideBar */ "./resources/js/pages/Admin/Components/Widgets/SideBar.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
@@ -5620,7 +5617,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AdminHeader = function AdminHeader() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
 
   var startScript = function startScript() {
     var script = document.createElement("script");
@@ -5671,14 +5668,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var NavBar = function NavBar() {
-  var appUrl = process.env.MIX_APP_URL || "";
+  var appUrl = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("nav", {
       className: "navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row",
@@ -5950,7 +5946,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_AdminFooter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/AdminFooter */ "./resources/js/pages/Admin/Components/AdminFooter.jsx");
 /* harmony import */ var _Components_AdminHeader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/AdminHeader */ "./resources/js/pages/Admin/Components/AdminHeader.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
@@ -5959,7 +5954,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Dashboard = function Dashboard() {
-  var appUrl = process.env.MIX_APP_URL || "";
+  var appUrl = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
       className: "container-scroller",
@@ -7919,7 +7914,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_widgets_Home_Reviews__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/widgets/Home/Reviews */ "./resources/js/pages/Website/components/widgets/Home/Reviews.jsx");
 /* harmony import */ var _components_widgets_Home_Services__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/widgets/Home/Services */ "./resources/js/pages/Website/components/widgets/Home/Services.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
@@ -7937,7 +7931,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Home = function Home() {
-  var appUrl = process.env.MIX_APP_URL || "";
+  var appUrl = "http://localhost:2124/EcommerceApp/" || 0;
 
   var startScript = function startScript() {
     var script = document.createElement("script");
@@ -8468,14 +8462,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var Footer = function Footer() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "footer",
@@ -8682,7 +8675,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
@@ -8690,7 +8682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Header = function Header() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
 
   var startScript = function startScript() {
     var script = document.createElement("script");
@@ -8862,14 +8854,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var Brands = function Brands() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "brand",
@@ -8985,14 +8976,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var Categories = function Categories() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "category",
@@ -9102,14 +9092,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var FeaturedProducts = function FeaturedProducts() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "featured-product product",
@@ -9471,14 +9460,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var MainSlider = function MainSlider() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "header",
@@ -9729,14 +9717,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var RecentProducts = function RecentProducts() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "recent-product product",
@@ -10098,14 +10085,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var Reviews = function Reviews() {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "review",
@@ -10324,14 +10310,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var DetailsCard = function DetailsCard(props) {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "col-md-4",
@@ -10419,14 +10404,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
 
 
 
 
 
 var ProductItems = function ProductItems(props) {
-  var url = process.env.MIX_APP_URL || "";
+  var url = "http://localhost:2124/EcommerceApp/" || 0;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
       "class": "product-item",

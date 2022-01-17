@@ -90,6 +90,7 @@
     <script src="{{url('/public/AdminAssets/js/chart.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/select2.js')}}"></script>
     <script src="{{url('/public/AdminAssets/js/editorDemo.js')}}"></script>
+    <script src="{{url('/public/AdminAssets/js/file-upload.js')}}"></script>
     <script src="//code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <script src="{{url('/public/AdminAssets/js/main.js?ver=' . time())}}"></script>
     <script src="{{url('/public/AdminAssets/js/dashboard.js')}}"></script>
