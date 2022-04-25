@@ -1,12 +1,24 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductAction } from "../../Redux/Actions/Product.Actions";
 import Breadcrumbs from "./components/Breadcrumbs";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Brands from "./components/widgets/Home/Brands";
+import DetailCardLoader from "./components/widgets/Product/DetailCardLoader";
 import DetailsCard from "./components/widgets/Product/DetailsCard";
 import ProductItems from "./components/widgets/Product/ProductItems";
 
 const Products = () => {
+    const [isloaded, setIsloaded] = React.useState(false);
+    const dispatch = useDispatch();
+    const { Products } = useSelector((state) => state.GET_PRODUCTS);
+    console.log("Products =", Products);
+    React.useEffect(() => {
+        dispatch(fetchProductAction()).then(() => {
+            setIsloaded(true);
+        });
+    }, [isloaded]);
     return (
         <>
             <Header />
@@ -146,37 +158,34 @@ const Products = () => {
                                         </div>
                                     </div>
                                 </div>
-
-                                <DetailsCard
-                                    ProductImage="product-10.jpg"
-                                    ProductName="Products Name"
-                                    ProductPrice="50"
-                                />
-                                <DetailsCard
-                                    ProductImage="product-8.jpg"
-                                    ProductName="Products Name"
-                                    ProductPrice="20"
-                                />
-                                <DetailsCard
-                                    ProductImage="product-7.jpg"
-                                    ProductName="Products Name"
-                                    ProductPrice="20"
-                                />
-                                <DetailsCard
-                                    ProductImage="product-5.jpg"
-                                    ProductName="Products Name"
-                                    ProductPrice="20"
-                                />
-                                <DetailsCard
-                                    ProductImage="product-1.jpg"
-                                    ProductName="Products Name"
-                                    ProductPrice="20"
-                                />
-                                <DetailsCard
-                                    ProductImage="product-2.jpg"
-                                    ProductName="Products Name"
-                                    ProductPrice="20"
-                                />
+                                {!isloaded ? (
+                                    <>
+                                        <DetailCardLoader />
+                                        <DetailCardLoader />
+                                        <DetailCardLoader />
+                                        <DetailCardLoader />
+                                        <DetailCardLoader />
+                                        <DetailCardLoader />
+                                    </>
+                                ) : (
+                                    <>
+                                        {Products.map((product, index) => (
+                                            <>
+                                                <DetailsCard
+                                                    ProductImage={
+                                                        product.product_image
+                                                    }
+                                                    ProductName={
+                                                        product.product_name
+                                                    }
+                                                    ProductPrice={
+                                                        product.product_price
+                                                    }
+                                                />
+                                            </>
+                                        ))}
+                                    </>
+                                )}
                             </div>
 
                             <div class="col-md-12">

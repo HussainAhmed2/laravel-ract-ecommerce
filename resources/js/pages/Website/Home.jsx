@@ -10,9 +10,11 @@ import Newsletter from "./components/widgets/Home/Newsletter";
 import RecentProducts from "./components/widgets/Home/RecentProducts";
 import Reviews from "./components/widgets/Home/Reviews";
 import Services from "./components/widgets/Home/Services";
-
+import { fetchProductAction } from "../../Redux/Actions/Product.Actions";
+import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
     const appUrl = process.env.MIX_APP_URL || "";
+    const dispatch = useDispatch();
     const startScript = () => {
         const script = document.createElement("script");
         script.src = appUrl + "public/WebsiteAssets/js/main.js";
@@ -21,7 +23,8 @@ const Home = () => {
     };
     useEffect(() => {
         startScript();
-    }, [appUrl]);
+        dispatch(fetchProductAction());
+    }, []);
     return (
         startScript && (
             <>

@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Web\ProductController as WebProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => 'auth:sanctum'], function(){
-    });
 
-Route::get('product-list',[ProductController::class,'index'])->name('product-list');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('product-list', [ProductController::class, 'index'])->name('product-list');
+});
+
+Route::post('auth/login', [AuthController::class, 'ApiLogin']);
+
+Route::get('getProducts', [WebProductController::class, 'getProducts']);

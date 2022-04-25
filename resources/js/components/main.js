@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 import AdminLogin from "../pages/Admin/Auth/AdminLogin";
 import AdminRegister from "../pages/Admin/Auth/AdminRegister";
 import Dashboard from "../pages/Admin/Dashboard";
@@ -13,6 +15,7 @@ import CheckOut from "../pages/Website/CheckOut";
 import Home from "../pages/Website/Home";
 import ProductDetails from "../pages/Website/ProductDetails";
 import Products from "../pages/Website/Products";
+import { persister, store } from "../Redux/Store/store";
 
 function Main() {
     let any_dir = process.env.MIX_SUB_DIR || "";
@@ -71,12 +74,12 @@ function Main() {
                         path={"/" + any_dir + "admin/Register"}
                         component={AdminRegister}
                     />
-                     <Route
+                    <Route
                         exact
                         path={"/" + any_dir + "admin/ProductsList"}
                         component={ProductsList}
                     />
-                     <Route
+                    <Route
                         exact
                         path={"/" + any_dir + "admin/CreateProduct"}
                         component={CreateProduct}
@@ -90,5 +93,14 @@ function Main() {
 export default Main;
 
 if (document.getElementById("main")) {
-    ReactDOM.render(<Main />, document.getElementById("main"));
+    ReactDOM.render(
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persister}>
+                <React.StrictMode>
+                    <Main />
+                </React.StrictMode>
+            </PersistGate>
+        </Provider>,
+        document.getElementById("main")
+    );
 }
