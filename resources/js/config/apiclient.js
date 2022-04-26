@@ -1,7 +1,8 @@
 import axios from "axios";
 
+let url = process.env.MIX_APP_URL || "";
 const apiClient = axios.create({
-    baseURL: "http://localhost:2124/EcommerceApp/api/",
+    baseURL: url+'api/',
     timeout: 15000,
 });
 
