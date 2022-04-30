@@ -1,13 +1,37 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { logOutAction } from "../../../Redux/Actions/User.Actions";
+import Swal from "sweetalert2";
 
 const Header = () => {
+    const { User } = useSelector((state) => state.USER_LOGIN);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const token = User?.token;
     const url = process.env.MIX_APP_URL || "";
     const startScript = () => {
         const script = document.createElement("script");
         script.src = url + "public/WebsiteAssets/js/main.js";
         document.body.appendChild(script);
         console.log(script);
+    };
+
+    const logOut = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be Log out from this Webiste!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(logOutAction(history));
+            }
+        });
     };
 
     useEffect(() => {
@@ -65,25 +89,37 @@ const Header = () => {
                                 </Link>
                             </div>
                             <div className="navbar-nav ml-auto">
-                                <div className="nav-item dropdown">
-                                    <a
-                                        href="#"
-                                        className="nav-link dropdown-toggle"
-                                        data-toggle="dropdown"
-                                    >
-                                        User Account
-                                    </a>
-                                    <div className="dropdown-menu">
-                                        <Link
-                                            to="Login"
-                                            className="nav-item nav-link "
-                                        >
-                                            <a className="nav-item nav-link">
-                                                Login & Register
+                                {token ? (
+                                    <>
+                                        <Link onClick={logOut}>
+                                            <a href="#" className="nav-link ">
+                                                Log Out
                                             </a>
                                         </Link>
-                                    </div>
-                                </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="nav-item dropdown">
+                                            <a
+                                                href="#"
+                                                className="nav-link dropdown-toggle"
+                                                data-toggle="dropdown"
+                                            >
+                                                User Account
+                                            </a>
+                                            <div className="dropdown-menu">
+                                                <Link
+                                                    to="Login"
+                                                    className="nav-item nav-link "
+                                                >
+                                                    <a className="nav-item nav-link">
+                                                        Login & Register
+                                                    </a>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </nav>

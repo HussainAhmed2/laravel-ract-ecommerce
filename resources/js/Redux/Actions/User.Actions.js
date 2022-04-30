@@ -13,6 +13,7 @@ export const user_login = (postData, history) => async (dispatch) => {
                 type: UserTypes.USER_LOGIN,
                 payload: res.data,
             });
+
             Swal.fire({
                 icon: "success",
                 title: "Login Success",
@@ -38,32 +39,32 @@ export const user_login = (postData, history) => async (dispatch) => {
 
 export const logOutAction = (history) => {
     storage.removeItem("persist:auth");
-    window.location.href = "/login";
+    history.push("/" + any_dir + "login");
     return {
         type: UserTypes.USER_LOGOUT,
     };
 };
 
-export const registerAction = (postData) => async () => {
+export const registerAction = (postData) => async (dispatch) => {
     await apiClient
         .register(postData)
         .then((res) => {
-            Swal.fire({
-                icon: "success",
-                title: "Success",
-                text: res.response,
-                button: false,
-                timer: 2000,
-            });
+            if (res.data.status != 404) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: res.response,
+                    button: false,
+                    timer: 2000,
+                });
+            } else {
+                dispatch({
+                    type: UserTypes.REGISTERED_VALIDATION,
+                    payload: res.data.message,
+                });
+            }
         })
         .catch((error) => {
             console.log("register error", error.response.data.message);
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: error.response.data.message,
-                button: false,
-                timer: 2000,
-            });
         });
 };

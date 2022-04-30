@@ -3,21 +3,25 @@ import persistReducer from "redux-persist/es/persistReducer";
 
 import storage from "redux-persist/lib/storage";
 import {
-  GetProductReducer,
-  ProductStoreReducer,
+    GetProductReducer,
+    ProductStoreReducer,
 } from "../Reducers/Product.Reducers";
-import { LoginUserReducer } from "../Reducers/User.Reducers";
+import {
+    LoginUserReducer,
+    RegisterUserRducers,
+} from "../Reducers/User.Reducers";
 
 const persistConfig = {
-  key: "auth",
-  storage: storage,
-  whitelist: ["USER_LOGIN"],
+    key: "auth",
+    storage: storage,
+    whitelist: ["USER_LOGIN"],
 };
 
 const rootReducers = combineReducers({
-  USER_LOGIN: LoginUserReducer,
-  GET_PRODUCTS: GetProductReducer,
-  PRODUCT_STORE: ProductStoreReducer,
+    USER_LOGIN: LoginUserReducer,
+    GET_PRODUCTS: GetProductReducer,
+    REGISTER_USER: RegisterUserRducers,
+    PRODUCT_STORE: ProductStoreReducer,
 });
 
 export default persistReducer(persistConfig, rootReducers);

@@ -11,21 +11,26 @@ import Header from "../components/Header";
 
 const Login = () => {
     const { User } = useSelector((state) => state.USER_LOGIN);
+    const { REGISTERED_VALIDATION } = useSelector(
+        (state) => state.REGISTER_USER
+    );
+
     const token = User?.token;
     let any_dir = process.env.MIX_SUB_DIR || "";
     const [LoginEmail, setLoginEmail] = React.useState();
     const [LoginPassword, setLoginPassword] = React.useState();
 
     const [isSubmit, setIsSubmit] = React.useState(false);
+    const [isRegisterSubmit, setIsRegisterSubmit] = React.useState(false);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [RegisterFname, setRegisterFname] = React.useState();
-    const [RegisterLname, setRegisterLname] = React.useState();
-    const [RegisterMobileNo, setRegisterMobileNo] = React.useState();
-    const [RegisterEmail, setRegisterEmail] = React.useState();
-    const [RegisterPassword, setRegisterPassword] = React.useState();
+    const [RegisterFname, setRegisterFname] = React.useState("");
+    const [RegisterLname, setRegisterLname] = React.useState("");
+    const [RegisterMobileNo, setRegisterMobileNo] = React.useState("");
+    const [RegisterEmail, setRegisterEmail] = React.useState("");
+    const [RegisterPassword, setRegisterPassword] = React.useState("");
 
     const auth = () => {
         if (token) {
@@ -46,7 +51,7 @@ const Login = () => {
 
     const SubmitRegister = (e) => {
         e.preventDefault();
-        setIsSubmit(true);
+        setIsRegisterSubmit(true);
         const postData = new FormData();
         postData.append("first_name", RegisterFname);
         postData.append("last_name", RegisterLname);
@@ -54,7 +59,7 @@ const Login = () => {
         postData.append("email", RegisterEmail);
         postData.append("password", RegisterPassword);
         dispatch(registerAction(postData)).then(() => {
-            setIsSubmit(false);
+            setIsRegisterSubmit(false);
         });
     };
 
@@ -87,6 +92,10 @@ const Login = () => {
                                                 setRegisterFname(e.target.value)
                                             }
                                         />
+
+                                        <p className="text-danger">
+                                            {REGISTERED_VALIDATION.first_name}
+                                        </p>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Last Name"</label>
@@ -98,6 +107,9 @@ const Login = () => {
                                                 setRegisterLname(e.target.value)
                                             }
                                         />
+                                        <p className="text-danger">
+                                            {REGISTERED_VALIDATION.last_name}
+                                        </p>
                                     </div>
                                     <div className="col-md-6">
                                         <label>E-mail</label>
@@ -109,6 +121,9 @@ const Login = () => {
                                                 setRegisterEmail(e.target.value)
                                             }
                                         />
+                                        <p className="text-danger">
+                                            {REGISTERED_VALIDATION.email}
+                                        </p>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Mobile No</label>
@@ -122,6 +137,9 @@ const Login = () => {
                                                 )
                                             }
                                         />
+                                        <p className="text-danger">
+                                            {REGISTERED_VALIDATION.mobile_no}
+                                        </p>
                                     </div>
                                     <div className="col-md-6">
                                         <label>Password</label>
@@ -135,6 +153,9 @@ const Login = () => {
                                                 )
                                             }
                                         />
+                                        <p className="text-danger">
+                                            {REGISTERED_VALIDATION.password}
+                                        </p>
                                     </div>
 
                                     <div className="col-md-12">
@@ -142,7 +163,7 @@ const Login = () => {
                                             className="btn"
                                             onClick={SubmitRegister}
                                         >
-                                            {isSubmit
+                                            {isRegisterSubmit
                                                 ? "Please Wait..."
                                                 : "Register"}
                                         </button>
