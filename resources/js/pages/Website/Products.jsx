@@ -13,6 +13,15 @@ const Products = () => {
     const [isloaded, setIsloaded] = React.useState(false);
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.GET_PRODUCTS);
+    const fetchMoreData = () => {
+        // a fake async api call like which sends
+        // 20 more records in 1.5 secs
+        setTimeout(() => {
+            this.setState({
+                items: this.state.items.concat(Array.from({ length: 20 })),
+            });
+        }, 1500);
+    };
     console.log("Products =", Products);
     React.useEffect(() => {
         dispatch(fetchProductAction()).then(() => {
@@ -158,6 +167,7 @@ const Products = () => {
                                         </div>
                                     </div>
                                 </div>
+
                                 {!isloaded ? (
                                     <>
                                         <DetailCardLoader />

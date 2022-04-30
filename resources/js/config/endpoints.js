@@ -1,8 +1,8 @@
 import apiClient from "./apiclient";
 
-const login = (postData) => apiClient.post("login", postData);
+const login = (postData) => apiClient.post("auth/login", postData);
 
-const register = (postData) => apiClient.post("register", postData);
+const register = (postData) => apiClient.post("auth/registerUser", postData);
 
 const fetchProducts = (token) =>
     apiClient.get("getProducts", {

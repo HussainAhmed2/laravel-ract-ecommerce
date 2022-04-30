@@ -1,9 +1,66 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {
+    user_login,
+    registerAction,
+} from "../../../Redux/Actions/User.Actions";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const Login = () => {
+    const { User } = useSelector((state) => state.USER_LOGIN);
+    const token = User?.token;
+    let any_dir = process.env.MIX_SUB_DIR || "";
+    const [LoginEmail, setLoginEmail] = React.useState();
+    const [LoginPassword, setLoginPassword] = React.useState();
+
+    const [isSubmit, setIsSubmit] = React.useState(false);
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const [RegisterFname, setRegisterFname] = React.useState();
+    const [RegisterLname, setRegisterLname] = React.useState();
+    const [RegisterMobileNo, setRegisterMobileNo] = React.useState();
+    const [RegisterEmail, setRegisterEmail] = React.useState();
+    const [RegisterPassword, setRegisterPassword] = React.useState();
+
+    const auth = () => {
+        if (token) {
+            history.push("/" + any_dir);
+        }
+    };
+
+    const SubmitLogin = (e) => {
+        e.preventDefault();
+        setIsSubmit(true);
+        const postData = new FormData();
+        postData.append("email", LoginEmail);
+        postData.append("password", LoginPassword);
+        dispatch(user_login(postData, history)).then(() => {
+            setIsSubmit(false);
+        });
+    };
+
+    const SubmitRegister = (e) => {
+        e.preventDefault();
+        setIsSubmit(true);
+        const postData = new FormData();
+        postData.append("first_name", RegisterFname);
+        postData.append("last_name", RegisterLname);
+        postData.append("mobile_no", RegisterMobileNo);
+        postData.append("email", RegisterEmail);
+        postData.append("password", RegisterPassword);
+        dispatch(registerAction(postData)).then(() => {
+            setIsSubmit(false);
+        });
+    };
+
+    React.useEffect(() => {
+        auth();
+    }, [isSubmit, token]);
     return (
         <>
             <Header />
@@ -26,6 +83,9 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="First Name"
+                                            onChange={(e) =>
+                                                setRegisterFname(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -34,6 +94,9 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="Last Name"
+                                            onChange={(e) =>
+                                                setRegisterLname(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -42,6 +105,9 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="E-mail"
+                                            onChange={(e) =>
+                                                setRegisterEmail(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -50,6 +116,11 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="Mobile No"
+                                            onChange={(e) =>
+                                                setRegisterMobileNo(
+                                                    e.target.value
+                                                )
+                                            }
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -58,18 +129,23 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="Password"
+                                            onChange={(e) =>
+                                                setRegisterPassword(
+                                                    e.target.value
+                                                )
+                                            }
                                         />
                                     </div>
-                                    <div className="col-md-6">
-                                        <label>Retype Password</label>
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            placeholder="Password"
-                                        />
-                                    </div>
+
                                     <div className="col-md-12">
-                                        <button className="btn">Submit</button>
+                                        <button
+                                            className="btn"
+                                            onClick={SubmitRegister}
+                                        >
+                                            {isSubmit
+                                                ? "Please Wait..."
+                                                : "Register"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +159,9 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="E-mail / Username"
+                                            onChange={(e) =>
+                                                setLoginEmail(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <div className="col-md-6">
@@ -91,25 +170,21 @@ const Login = () => {
                                             className="form-control"
                                             type="text"
                                             placeholder="Password"
+                                            onChange={(e) =>
+                                                setLoginPassword(e.target.value)
+                                            }
                                         />
                                     </div>
+
                                     <div className="col-md-12">
-                                        <div className="custom-control custom-checkbox">
-                                            <input
-                                                type="checkbox"
-                                                className="custom-control-input"
-                                                id="newaccount"
-                                            />
-                                            <label
-                                                className="custom-control-label"
-                                                htmlFor="newaccount"
-                                            >
-                                                Keep me signed in
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div className="col-md-12">
-                                        <button className="btn">Submit</button>
+                                        <button
+                                            className="btn"
+                                            onClick={SubmitLogin}
+                                        >
+                                            {isSubmit
+                                                ? "Please Wait..."
+                                                : "Login"}
+                                        </button>
                                     </div>
                                 </div>
                             </div>

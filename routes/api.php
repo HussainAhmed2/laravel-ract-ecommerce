@@ -22,4 +22,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 Route::post('auth/login', [AuthController::class, 'ApiLogin']);
 
+Route::post('auth/registerUser', [AuthController::class, 'registerUser']);
+
 Route::get('getProducts', [WebProductController::class, 'getProducts']);
