@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { AddCart } from "../../../../../Redux/Actions/Cart.Actions";
 
 const DetailsCard = (props) => {
+    const dispatch = useDispatch();
     const url = process.env.MIX_APP_URL || "";
+
+    const SubmitAddCart = (item) => {
+        dispatch(AddCart(item));
+    };
     return (
         <>
             <div className="col-md-4">
@@ -28,7 +35,10 @@ const DetailsCard = (props) => {
                             />
                         </a>
                         <div className="product-action">
-                            <a href="#">
+                            <a
+                                type="button"
+                                onClick={() => SubmitAddCart(props)}
+                            >
                                 <i className="fa fa-cart-plus"></i>
                             </a>
                             <a href="#">

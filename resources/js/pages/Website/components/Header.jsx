@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const Header = () => {
     const { User } = useSelector((state) => state.USER_LOGIN);
+    const { numberCart } = useSelector((state) => state.CART);
     const dispatch = useDispatch();
     const history = useHistory();
     const token = User?.token;
@@ -160,7 +161,7 @@ const Header = () => {
                                 </a>
                                 <a href="cart.html" className="btn cart">
                                     <i className="fa fa-shopping-cart"></i>
-                                    <span>(0)</span>
+                                    <span>({numberCart})</span>
                                 </a>
                             </div>
                         </div>
