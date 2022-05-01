@@ -20,7 +20,7 @@ const ProductItems = (props) => {
                         <img
                             src={
                                 url +
-                                "public/WebsiteAssets/img/" +
+                                "public/uploads/images/" +
                                 props.ProductImage
                             }
                             alt="Product Image"

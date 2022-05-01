@@ -182,13 +182,14 @@ const Products = () => {
                                         {Products.map((product, index) => (
                                             <>
                                                 <DetailsCard
-                                                    ProductImage={
+                                                    id={product.id}
+                                                    product_image={
                                                         product.product_image
                                                     }
-                                                    ProductName={
+                                                    product_name={
                                                         product.product_name
                                                     }
-                                                    ProductPrice={
+                                                    product_price={
                                                         product.product_price
                                                     }
                                                 />

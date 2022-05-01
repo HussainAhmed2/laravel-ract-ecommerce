@@ -1,7 +1,15 @@
 import { CartTypes } from "../Types/Cart.Types";
 const initProduct = {
     numberCart: 0,
-    Carts: [],
+    Carts: [
+        {
+            id: "",
+            quantity: "",
+            product_name: "",
+            product_image: "",
+            product_price: "",
+        },
+    ],
 };
 
 export const CartReducers = (state = initProduct, action) => {
@@ -15,9 +23,9 @@ export const CartReducers = (state = initProduct, action) => {
                 let cart = {
                     id: action.payload.id,
                     quantity: 1,
-                    name: action.payload.name,
-                    image: action.payload.image,
-                    price: action.payload.price,
+                    product_name: action.payload.product_name,
+                    product_image: action.payload.product_image,
+                    product_price: action.payload.product_price,
                 };
                 state.Carts.push(cart);
             } else {
@@ -32,9 +40,9 @@ export const CartReducers = (state = initProduct, action) => {
                     let _cart = {
                         id: action.payload.id,
                         quantity: 1,
-                        name: action.payload.name,
-                        image: action.payload.image,
-                        price: action.payload.price,
+                        product_name: action.payload.product_name,
+                        product_image: action.payload.product_image,
+                        product_price: action.payload.product_price,
                     };
                     state.Carts.push(_cart);
                 }

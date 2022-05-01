@@ -14,7 +14,7 @@ const DetailsCard = (props) => {
             <div className="col-md-4">
                 <div className="product-item">
                     <div className="product-title">
-                        <a href="#">{props.ProductName}</a>
+                        <a href="#">{props.product_name}</a>
                         <div className="ratting">
                             <i className="fa fa-star"></i>
                             <i className="fa fa-star"></i>
@@ -29,7 +29,7 @@ const DetailsCard = (props) => {
                                 src={
                                     url +
                                     "public/WebsiteAssets/img/" +
-                                    props.ProductImage
+                                    props.product_image
                                 }
                                 alt="Product Image"
                             />
@@ -52,7 +52,7 @@ const DetailsCard = (props) => {
                     <div className="product-price">
                         <h3>
                             <span>$</span>
-                            {props.ProductPrice}
+                            {props.product_price}
                         </h3>
                         <a className="btn" href="">
                             <i className="fa fa-shopping-cart"></i>Buy Now

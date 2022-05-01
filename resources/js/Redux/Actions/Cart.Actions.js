@@ -1,4 +1,6 @@
 import { CartTypes } from "../Types/Cart.Types";
+import Swal from "sweetalert2";
+import toast from "./../../config/toast";
 
 export function GetNumberCart() {
     return {
@@ -7,6 +9,16 @@ export function GetNumberCart() {
 }
 
 export function AddCart(payload) {
+    if (payload) {
+        Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: " This Item Added in Cart",
+            showCancelButton: false,
+            showConfirmButton: false,
+            timer: 1500,
+        });
+    }
     return {
         type: CartTypes.ADD_CART,
         payload,

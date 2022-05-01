@@ -159,10 +159,10 @@ const Header = () => {
                                     <i className="fa fa-heart"></i>
                                     <span>(0)</span>
                                 </a>
-                                <a href="cart.html" className="btn cart">
+                                <Link to={"Cart"} className="btn cart">
                                     <i className="fa fa-shopping-cart"></i>
                                     <span>({numberCart})</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
