@@ -17,7 +17,7 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
-    public function PriductRating()
+    public function ProductRating()
     {
         return $this->hasMany(Product_Rating::class, 'product_id', 'id');
     }

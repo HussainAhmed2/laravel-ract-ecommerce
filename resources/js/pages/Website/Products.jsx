@@ -8,6 +8,7 @@ import Brands from "./components/widgets/Home/Brands";
 import DetailCardLoader from "./components/widgets/Product/DetailCardLoader";
 import DetailsCard from "./components/widgets/Product/DetailsCard";
 import ProductItems from "./components/widgets/Product/ProductItems";
+import Pagination from "react-js-pagination";
 
 const Products = () => {
     const [isloaded, setIsloaded] = React.useState(false);
@@ -42,7 +43,7 @@ const Products = () => {
             <div class="product-view">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="product-view-top">
@@ -179,7 +180,7 @@ const Products = () => {
                                     </>
                                 ) : (
                                     <>
-                                        {Products.map((product, index) => (
+                                        {Products.data.map((product, index) => (
                                             <>
                                                 <DetailsCard
                                                     id={product.id}
@@ -199,151 +200,36 @@ const Products = () => {
                                 )}
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-12 d-flex justify-content-center">
                                 <nav aria-label="Page navigation example">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item disabled">
-                                            <a
-                                                class="page-link"
-                                                href="#"
-                                                tabindex="-1"
-                                            >
-                                                Previous
-                                            </a>
-                                        </li>
-                                        <li class="page-item active">
-                                            <a class="page-link" href="#">
-                                                1
-                                            </a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                2
-                                            </a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                3
-                                            </a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">
-                                                Next
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <Pagination
+                                        activePage={
+                                            Products?.current_page
+                                                ? Products?.current_page
+                                                : 0
+                                        }
+                                        itemsCountPerPage={
+                                            Products?.per_page
+                                                ? Products?.per_page
+                                                : 0
+                                        }
+                                        totalItemsCount={
+                                            Products?.total
+                                                ? Products?.total
+                                                : 0
+                                        }
+                                        onChange={(pageNumber) => {
+                                            dispatch(
+                                                fetchProductAction(pageNumber)
+                                            );
+                                        }}
+                                        pageRangeDisplayed={8}
+                                        itemClass="page-item"
+                                        linkClass="page-link"
+                                        firstPageText="First Page"
+                                        lastPageText="Last Lage"
+                                    />
                                 </nav>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 sidebar">
-                            <div class="sidebar-widget category">
-                                <h2 class="title">Category</h2>
-                                <nav class="navbar bg-light">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <i class="fa fa-female"></i>
-                                                Fashion & Beauty
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <i class="fa fa-child"></i>Kids
-                                                & Babies Clothes
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <i class="fa fa-tshirt"></i>Men
-                                                & Women Clothes
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <i class="fa fa-mobile-alt"></i>
-                                                Gadgets & Accessories
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">
-                                                <i class="fa fa-microchip"></i>
-                                                Electronics & Accessories
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-
-                            <div class="sidebar-widget widget-slider">
-                                <div class="sidebar-slider normal-slider">
-                                    <ProductItems
-                                        ProductImage="product-1.jpg"
-                                        ProductName="Products Name"
-                                        ProductPrice="20"
-                                    />
-                                    <ProductItems
-                                        ProductImage="product-4.jpg"
-                                        ProductName="Products Name"
-                                        ProductPrice="20"
-                                    />
-                                    <ProductItems
-                                        ProductImage="product-5.jpg"
-                                        ProductName="Products Name"
-                                        ProductPrice="20"
-                                    />
-                                    <ProductItems
-                                        ProductImage="product-7.jpg"
-                                        ProductName="Products Name"
-                                        ProductPrice="20"
-                                    />
-                                </div>
-                            </div>
-
-                            <div class="sidebar-widget brands">
-                                <h2 class="title">Our Brands</h2>
-                                <ul>
-                                    <li>
-                                        <a href="#">Nulla </a>
-                                        <span>(45)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Curabitur </a>
-                                        <span>(34)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Nunc </a>
-                                        <span>(67)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Ullamcorper</a>
-                                        <span>(74)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Fusce </a>
-                                        <span>(89)</span>
-                                    </li>
-                                    <li>
-                                        <a href="#">Sagittis</a>
-                                        <span>(28)</span>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="sidebar-widget tag">
-                                <h2 class="title">Tags Cloud</h2>
-                                <a href="#">Lorem ipsum</a>
-                                <a href="#">Vivamus</a>
-                                <a href="#">Phasellus</a>
-                                <a href="#">pulvinar</a>
-                                <a href="#">Curabitur</a>
-                                <a href="#">Fusce</a>
-                                <a href="#">Sem quis</a>
-                                <a href="#">Mollis metus</a>
-                                <a href="#">Sit amet</a>
-                                <a href="#">Vel posuere</a>
-                                <a href="#">orci luctus</a>
-                                <a href="#">Nam lorem</a>
                             </div>
                         </div>
                     </div>

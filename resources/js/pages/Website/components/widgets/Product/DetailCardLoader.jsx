@@ -8,7 +8,7 @@ const DetailCardLoader = () => {
     }, []);
     return (
         <>
-            <div className="col-md-4">
+            <div className="col-md-3">
                 <div className="product-item">
                     <div className="product-title">
                         <Placeholder as={Card.Title} animation="glow">
