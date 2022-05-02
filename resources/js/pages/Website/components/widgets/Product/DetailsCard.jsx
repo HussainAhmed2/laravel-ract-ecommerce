@@ -1,10 +1,23 @@
 import React from "react";
+import ReactStars from "react-rating-stars-component";
 import { useDispatch } from "react-redux";
 import { AddCart } from "../../../../../Redux/Actions/Cart.Actions";
 
 const DetailsCard = (props) => {
     const dispatch = useDispatch();
     const url = process.env.MIX_APP_URL || "";
+    var AverageRating = parseFloat(props.avgRatings).toFixed(2);
+    console.log("average rating", AverageRating);
+    const secondExample = {
+        count: 5,
+        value: AverageRating,
+        edit: false,
+        a11y: true,
+        isHalf: true,
+        emptyIcon: <i className="far fa-star" />,
+        halfIcon: <i className="fa fa-star-half-alt" />,
+        filledIcon: <i className="fa fa-star" />,
+    };
 
     const SubmitAddCart = (item) => {
         dispatch(AddCart(item));
@@ -15,12 +28,8 @@ const DetailsCard = (props) => {
                 <div className="product-item">
                     <div className="product-title">
                         <a href="#">{props.product_name}</a>
-                        <div className="ratting">
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
-                            <i className="fa fa-star"></i>
+                        <div className="ratting d-flex justify-content-center">
+                            <ReactStars {...secondExample} />
                         </div>
                     </div>
                     <div className="product-image">
@@ -28,7 +37,7 @@ const DetailsCard = (props) => {
                             <img
                                 src={
                                     url +
-                                    "public/WebsiteAssets/img/" +
+                                    "public/uploads/images/" +
                                     props.product_image
                                 }
                                 alt="Product Image"

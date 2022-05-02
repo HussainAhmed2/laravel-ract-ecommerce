@@ -187,6 +187,9 @@ const Products = () => {
                                                     product_image={
                                                         product.product_image
                                                     }
+                                                    avgRatings={
+                                                        product.AverageRating
+                                                    }
                                                     product_name={
                                                         product.product_name
                                                     }

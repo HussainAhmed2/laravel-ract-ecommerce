@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
 
 const CartItemsPrices = () => {
+    const { User } = useSelector((state) => state.USER_LOGIN);
+    const token = User?.token;
     const { Carts } = useSelector((state) => state.CART);
     let ListCart = [];
     let SubTotalCart = 0;
@@ -13,6 +16,18 @@ const CartItemsPrices = () => {
         console.log("items", Carts[item].price);
     });
     GrantTotalCart = SubTotalCart + shipmentCost;
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const CheckoutProsess = () => {
+        if (!token) {
+            handleShow();
+        } else {
+        }
+    };
 
     return (
         <>
@@ -46,12 +61,31 @@ const CartItemsPrices = () => {
                             </div>
                             <div className="cart-btn">
                                 <button>Update Cart</button>
-                                <button>Checkout</button>
+                                <button onClick={CheckoutProsess}>
+                                    Checkout
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h1>Hi</h1>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };

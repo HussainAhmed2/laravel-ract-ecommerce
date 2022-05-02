@@ -21,25 +21,25 @@ class ProductController extends Controller
         // }
 
         $data = Product::With(["Category", "Brand", "ProductRating.product", "PriductImages.product"])
+
+            ->Join('product__ratings', 'product__ratings.product_id', 'products.id')
+
             ->select(
                 "products.id",
-
+                "products.product_image",
+                "products.product_name",
+                "products.product_price",
                 DB::raw('AVG(product__ratings.rating) as AverageRating')
             )
-            ->Join('product__ratings', 'product__ratings.product_id', 'products.id')
             ->groupBy('products.id')
-            ->orderBy('id', 'DESC')
+            ->groupBy('products.product_image')
+            ->groupBy('products.product_name')
+            ->groupBy('products.product_price')
+            ->orderBy('products.id', 'DESC')
             ->paginate(12);
 
-        // $data = Product::With(["Category", "Brand", "PriductRating.product", "PriductImages.product"])
-        //     ->select(DB::raw('AVG(product__ratings.rating) as AverageRating'))
-        //     ->groupBy('products.id')->get();
 
-        // $data = Product::With(["PriductRating.product"])
-        //     ->join('product__ratings', 'products.id', '=', 'product__ratings.product_id')
 
-        //     ->select('products.*', DB::raw('avg(product__ratings.rating) as AvarageRate'))
-        //     ->groupBy('product__ratings.product_id')->get();
         return json_encode($data);
     }
 }
