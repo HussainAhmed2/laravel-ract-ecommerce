@@ -49,3 +49,9 @@ export function DecreaseQuantity(payload) {
         payload,
     };
 }
+
+export const emptyCartAction = () => {
+    return {
+        type: CartTypes.EMPTY_CART,
+    };
+};

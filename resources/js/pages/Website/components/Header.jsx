@@ -92,8 +92,23 @@ const Header = () => {
                             <div className="navbar-nav ml-auto">
                                 {token ? (
                                     <>
-                                        <Link onClick={logOut}>
-                                            <a href="#" className="nav-link ">
+                                        <Link
+                                            onClick={() => {
+                                                if (
+                                                    window.confirm(
+                                                        "Do You Want To Logout?"
+                                                    )
+                                                ) {
+                                                    dispatch(
+                                                        logOutAction(history)
+                                                    );
+                                                }
+                                            }}
+                                        >
+                                            <a
+                                                href="#"
+                                                className="btn btn-danger"
+                                            >
                                                 Log Out
                                             </a>
                                         </Link>

@@ -10,11 +10,10 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const Login = () => {
-    const { User } = useSelector((state) => state.USER_LOGIN);
     const { REGISTERED_VALIDATION } = useSelector(
         (state) => state.REGISTER_USER
     );
-
+    const { User } = useSelector((state) => state.USER_LOGIN);
     const token = User?.token;
     let any_dir = process.env.MIX_SUB_DIR || "";
     const [LoginEmail, setLoginEmail] = React.useState();

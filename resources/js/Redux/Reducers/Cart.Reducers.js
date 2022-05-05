@@ -1,15 +1,7 @@
 import { CartTypes } from "../Types/Cart.Types";
 const initProduct = {
     numberCart: 0,
-    Carts: [
-        {
-            id: "",
-            quantity: "",
-            product_name: "",
-            product_image: "",
-            product_price: "",
-        },
-    ],
+    Carts: [],
 };
 
 export const CartReducers = (state = initProduct, action) => {
@@ -77,6 +69,8 @@ export const CartReducers = (state = initProduct, action) => {
                     return item.id != state.Carts[action.payload].id;
                 }),
             };
+        case CartTypes.EMPTY_CART:
+            return (state = initProduct);
         default:
             return state;
     }

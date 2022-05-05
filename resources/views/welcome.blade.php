@@ -36,6 +36,7 @@
     <script src="{{ asset('/public/WebsiteAssets/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('/public/WebsiteAssets/lib/slick/slick.min.js') }}"></script>
     <script src="holder.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('/public/WebsiteAssets/js/main.js') }}"></script>
     <script type="application/javascript" src="{{ url('/public/js/app.js') }}"></script>

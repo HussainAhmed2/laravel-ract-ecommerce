@@ -37,9 +37,41 @@ export const user_login = (postData, history) => async (dispatch) => {
         });
 };
 
+export const user_login_model = (postData, history) => async (dispatch) => {
+    await apiClient
+        .login(postData)
+        .then((res) => {
+            dispatch({
+                type: UserTypes.USER_LOGIN,
+                payload: res.data,
+            });
+
+            Swal.fire({
+                icon: "success",
+                title: "Login Success",
+                text: "Now you process checkout",
+                button: false,
+                timer: 2000,
+            }).then(() => {
+                history.push("checkout");
+            });
+        })
+        .catch((error) => {
+            Swal.fire({
+                icon: "error",
+                title: "Login Failed",
+                text: error.response.data.message,
+                showCancelButton: false,
+                showCloseButton: false,
+                showConfirmButton: false,
+                timer: 2000,
+            });
+        });
+};
+
 export const logOutAction = (history) => {
     storage.removeItem("persist:auth");
-    history.push("/" + any_dir + "login");
+    history.push("login");
     return {
         type: UserTypes.USER_LOGOUT,
     };

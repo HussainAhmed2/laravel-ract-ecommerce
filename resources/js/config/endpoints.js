@@ -20,9 +20,21 @@ const storeProduct = (token, postData) =>
         },
     });
 
+const createOrder = (token, postData) =>
+    apiClient.post("createOrder", postData, {
+        headers: {
+            "content-type": "application/json; multipart/form-data",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+const paymenyPay = (postData) => apiClient.get("checkout", postData);
+
 export default {
     login,
     register,
     fetchProducts,
     storeProduct,
+    paymenyPay,
+    createOrder,
 };

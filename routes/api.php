@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Web\CheckoutController as WebCheckoutController;
 use App\Http\Controllers\Web\ProductController as WebProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,5 @@ Route::post('auth/login', [AuthController::class, 'ApiLogin']);
 Route::post('auth/registerUser', [AuthController::class, 'registerUser']);
 
 Route::get('getProducts', [WebProductController::class, 'getProducts']);
+
+Route::post('createOrder', [WebCheckoutController::class, 'createOrder']);

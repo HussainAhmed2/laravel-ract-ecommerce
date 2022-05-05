@@ -8,6 +8,8 @@ import {
 
 const CartItems = () => {
     const { Carts } = useSelector((state) => state.CART);
+
+    console.log("Cart", Carts);
     let ListCart = [];
     let TotalCart = 0;
     Object.keys(Carts).forEach(function (item) {

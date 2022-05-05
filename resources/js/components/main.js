@@ -16,6 +16,9 @@ import Home from "../pages/Website/Home";
 import ProductDetails from "../pages/Website/ProductDetails";
 import Products from "../pages/Website/Products";
 import { persister, store } from "../Redux/Store/store";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe, Stripe } from "@stripe/stripe-js";
+import OrderConfirm from "../pages/Website/OrderConfirm";
 
 function Main() {
     let any_dir = process.env.MIX_SUB_DIR || "";
@@ -50,8 +53,15 @@ function Main() {
 
                     <Route path={"/" + any_dir + "Cart"} component={Cart} />
                     <Route
+                        exact
                         path={"/" + any_dir + "Checkout"}
                         component={CheckOut}
+                    />
+
+                    <Route
+                        exact
+                        path={"/" + any_dir + "OrderConfirm"}
+                        component={OrderConfirm}
                     />
 
                     {/* <Route
@@ -92,13 +102,23 @@ function Main() {
 
 export default Main;
 
+const stripePromise = loadStripe(
+    "pk_test_51Kv4RJEsCP0q5o5TBJVGkGcneDzXtsUu0KLf4UKbaqUY1tRJW75Jwmyerk7b3f7FsKK1kTIbOusiGdc2WPO8grAg00Lmefl8e6"
+);
+
+const options = {
+    clientSecret: "CLIENT_SECRET",
+};
+
 if (document.getElementById("main")) {
     ReactDOM.render(
         <Provider store={store}>
             <PersistGate loading={null} persistor={persister}>
-                <React.StrictMode>
-                    <Main />
-                </React.StrictMode>
+                <Elements stripe={stripePromise}>
+                    <React.StrictMode>
+                        <Main />
+                    </React.StrictMode>
+                </Elements>
             </PersistGate>
         </Provider>,
         document.getElementById("main")
