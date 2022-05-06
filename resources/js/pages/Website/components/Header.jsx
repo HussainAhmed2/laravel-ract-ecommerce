@@ -88,6 +88,20 @@ const Header = () => {
                                         Products
                                     </a>
                                 </Link>
+                                {token ? (
+                                    <>
+                                        <Link
+                                            to="MyAccount"
+                                            className="nav-item nav-link active"
+                                        >
+                                            <a className="nav-item nav-link">
+                                                My Account
+                                            </a>
+                                        </Link>
+                                    </>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                             <div className="navbar-nav ml-auto">
                                 {token ? (

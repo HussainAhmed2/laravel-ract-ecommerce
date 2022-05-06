@@ -19,6 +19,8 @@ import { persister, store } from "../Redux/Store/store";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 import OrderConfirm from "../pages/Website/OrderConfirm";
+import MyAccount from "../pages/Website/MyAccount";
+import WishList from "../pages/Website/WishList";
 
 function Main() {
     let any_dir = process.env.MIX_SUB_DIR || "";
@@ -63,7 +65,16 @@ function Main() {
                         path={"/" + any_dir + "OrderConfirm"}
                         component={OrderConfirm}
                     />
-
+                    <Route
+                        exact
+                        path={"/" + any_dir + "MyAccount"}
+                        component={MyAccount}
+                    />
+                    <Route
+                        exact
+                        path={"/" + any_dir + "Wishlist"}
+                        component={WishList}
+                    />
                     {/* <Route
                             path={"/" + any_dir + "Show/:id"}
                             component={Show}

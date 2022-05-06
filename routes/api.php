@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Web\CheckoutController as WebCheckoutController;
 use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\ProductController as WebProductController;
+use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,4 @@ Route::post('auth/registerUser', [AuthController::class, 'registerUser']);
 Route::get('getProducts', [WebProductController::class, 'getProducts']);
 
 Route::get('getOrder/{id}', [OrderController::class, 'getOrder']);
+Route::get('user/getOrders/{id}', [UserController::class, 'getOrders']);

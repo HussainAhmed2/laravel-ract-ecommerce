@@ -29,7 +29,7 @@ const OrderConfirm = () => {
         dispatch(fetchSingleOrderAction(token, order_no)).then(() => {
             setIsloaded(true);
         }, [isloaded]);
-    }, [token]);
+    }, [token, isloaded]);
 
     return (
         <>

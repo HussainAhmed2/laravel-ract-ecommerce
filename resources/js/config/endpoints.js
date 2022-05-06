@@ -36,6 +36,14 @@ const fetchSingleOrder = (token, order_no) =>
         },
     });
 
+const fetchUserOrders = (token, user_id) =>
+    apiClient.get(`user/getOrders/${user_id}`, {
+        headers: {
+            "content-type": "application/json; multipart/form-data",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
 export default {
@@ -46,4 +54,5 @@ export default {
     paymenyPay,
     createOrder,
     fetchSingleOrder,
+    fetchUserOrders,
 };

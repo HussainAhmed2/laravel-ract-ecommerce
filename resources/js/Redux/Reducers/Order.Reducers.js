@@ -32,3 +32,13 @@ export const fetchOrderReducer = (state = [], { type, payload }) => {
             return state;
     }
 };
+
+export const fetchUserOrderReducer = (state = [], { type, payload }) => {
+    switch (type) {
+        case OrderTypes.USER_GET_ORDERS:
+            return { ...state, UserOrders: payload };
+
+        default:
+            return state;
+    }
+};

@@ -7,6 +7,7 @@ import { CheckoutPaymentReducer } from "../Reducers/Checkout.Reducers";
 import {
     createOrderReducer,
     fetchOrderReducer,
+    fetchUserOrderReducer,
 } from "../Reducers/Order.Reducers";
 import {
     GetProductReducer,
@@ -20,7 +21,7 @@ import {
 const persistCartConfig = {
     key: "cart",
     storage: storage,
-    whitelist: ["CART", "CREATE_ORDER"],
+    whitelist: ["CART"],
 };
 
 const persistAuthConfig = {
@@ -45,6 +46,7 @@ const rootReducers = combineReducers({
     CHECKOUT_PAYMENT: CheckoutPaymentReducer,
     CREATE_ORDER: createOrderReducer,
     SINGLE_ORDER: fetchOrderReducer,
+    USER_ORDERS: fetchUserOrderReducer,
 });
 
 export default persistReducer(persistCartConfig, rootReducers);

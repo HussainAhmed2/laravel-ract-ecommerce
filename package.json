@@ -28,6 +28,7 @@
         "@stripe/stripe-js": "^1.29.0",
         "crypto-js": "^4.1.1",
         "holderjs": "^2.9.9",
+        "moment": "^2.29.3",
         "react-bootstrap": "^2.3.0",
         "react-infinite-scroll-component": "^6.1.0",
         "react-js-pagination": "^3.0.3",
