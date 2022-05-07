@@ -59,9 +59,17 @@ const fetchUserWishlist = (token, user_id) =>
         },
     });
 
+const deleteItemFromWishlist = (token, item_id) =>
+    apiClient.get(`user/deleteCartItem/${item_id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
 export default {
+    //Website EndPoints
     login,
     register,
     fetchProducts,
@@ -72,4 +80,5 @@ export default {
     fetchUserOrders,
     addToWishlist,
     fetchUserWishlist,
+    deleteItemFromWishlist,
 };

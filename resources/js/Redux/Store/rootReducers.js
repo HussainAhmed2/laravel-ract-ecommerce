@@ -48,7 +48,7 @@ const rootReducers = combineReducers({
     CREATE_ORDER: createOrderReducer,
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
-    USER_WISHLIST: fetchUserWishlistReducer,
+    USER_WISHLIST: persistReducer(persistAuthConfig, fetchUserWishlistReducer),
 });
 
 export default persistReducer(persistCartConfig, rootReducers);

@@ -1,9 +1,44 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AddCart } from "../../Redux/Actions/Cart.Actions";
+import {
+    deleteItemFromWishlistAction,
+    fetchUserWishlistAction,
+} from "../../Redux/Actions/User.Actions";
 import Breadcrumbs from "./components/Breadcrumbs";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-const WishList = () => {
+const WishList = (props) => {
+    const { User } = useSelector((state) => state.USER_LOGIN);
+    const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
+    const url = process.env.MIX_APP_URL || "";
+    const token = User?.token;
+    const userid = User.user.id;
+    const [isSubmit, setIsSubmit] = React.useState(false);
+    const dispatch = useDispatch();
+    const SubmitAddCart = (item) => {
+        dispatch(AddCart(item));
+    };
+
+    const auth = () => {
+        if (!token) {
+            history.push("login");
+        }
+    };
+
+    const deleteWishlistItem = (item_id) => {
+        setIsSubmit(true);
+        dispatch(deleteItemFromWishlistAction(token, item_id)).then(() => {
+            dispatch(fetchUserWishlistAction(token, userid));
+            setIsSubmit(false);
+        });
+    };
+
+    React.useEffect(() => {
+        auth();
+    }, [token, isSubmit]);
+
     return (
         <>
             <Header />
@@ -26,50 +61,90 @@ const WishList = () => {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Price</th>
-                                                <th>Quantity</th>
                                                 <th>Add to Cart</th>
                                                 <th>Remove</th>
                                             </tr>
                                         </thead>
                                         <tbody className="align-middle">
-                                            <tr>
-                                                <td>
-                                                    <div className="img">
-                                                        <a href="#">
-                                                            <img
-                                                                src="img/product-6.jpg"
-                                                                alt="Image"
-                                                            />
-                                                        </a>
-                                                        <p>Product Name</p>
-                                                    </div>
-                                                </td>
-                                                <td>$99</td>
-                                                <td>
-                                                    <div className="qty">
-                                                        <button className="btn-minus">
-                                                            <i className="fa fa-minus"></i>
-                                                        </button>
-                                                        <input
-                                                            type="text"
-                                                            value="1"
-                                                        />
-                                                        <button className="btn-plus">
-                                                            <i className="fa fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <button className="btn-cart">
-                                                        Add to Cart
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <button>
-                                                        <i className="fa fa-trash"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            {Wishlist[0].wishlists.map(
+                                                (item, index) => (
+                                                    <>
+                                                        <tr key={index}>
+                                                            <td>
+                                                                <div className="img">
+                                                                    <a href="#">
+                                                                        <img
+                                                                            src={
+                                                                                url +
+                                                                                "public/uploads/images/" +
+                                                                                item
+                                                                                    .product
+                                                                                    .product_image
+                                                                            }
+                                                                            alt="Image"
+                                                                        />
+                                                                    </a>
+                                                                    <p>
+                                                                        {
+                                                                            item
+                                                                                .product
+                                                                                .product_name
+                                                                        }
+                                                                    </p>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                ${" "}
+                                                                {
+                                                                    item.product
+                                                                        .product_price
+                                                                }
+                                                            </td>
+
+                                                            <td>
+                                                                <button
+                                                                    className="btn-cart"
+                                                                    onClick={() =>
+                                                                        SubmitAddCart(
+                                                                            {
+                                                                                id: item
+                                                                                    .product
+                                                                                    .id,
+                                                                                product_image:
+                                                                                    item
+                                                                                        .product
+                                                                                        .product_image,
+
+                                                                                product_name:
+                                                                                    item
+                                                                                        .product
+                                                                                        .product_name,
+                                                                                product_price:
+                                                                                    item
+                                                                                        .product
+                                                                                        .product_price,
+                                                                            }
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    Add to Cart
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        deleteWishlistItem(
+                                                                            item.id
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <i className="fa fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </>
+                                                )
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>

@@ -9,13 +9,13 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function Category()
+    public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class);
     }
-    public function Brand()
+    public function brand()
     {
-        return $this->belongsTo(Brand::class, 'brand_id', 'id');
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
     }
     public function ProductRating()
     {
@@ -33,10 +33,10 @@ class Product extends Model
     }
     public function wishlists()
     {
-        return $this->belongsTo(
+        return $this->belongsToMany(
             Wishlist::class,
-            'product_id',
-            'id'
+            "wishlists",
+
         );
     }
 }

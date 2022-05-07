@@ -1,6 +1,7 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { AddCart } from "../../../../../Redux/Actions/Cart.Actions";
 import {
     addToWishlistAction,
@@ -10,6 +11,7 @@ import {
 const DetailsCard = (props) => {
     const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
     const dispatch = useDispatch();
+    const history = useHistory();
     const url = process.env.MIX_APP_URL || "";
     const [isloaded, setIsloaded] = React.useState(false);
     const [isFound, setIsFound] = React.useState(false);
@@ -40,6 +42,10 @@ const DetailsCard = (props) => {
             dispatch(fetchUserWishlistAction(token, props.user_id));
             setIsloaded(true);
         });
+    };
+
+    const GoToProducts = () => {
+        history.push("ProductDetails");
     };
 
     React.useEffect(() => {}, [isloaded]);
@@ -86,7 +92,7 @@ const DetailsCard = (props) => {
                                 </>
                             )}
 
-                            <a href="#">
+                            <a type="button" onClick={() => GoToProducts()}>
                                 <i className="fa fa-search"></i>
                             </a>
                         </div>

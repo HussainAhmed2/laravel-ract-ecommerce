@@ -38,7 +38,16 @@ class UserController extends Controller
     }
     public function getUserWhislist($user_id)
     {
-        $data = User::with(['wishlists'])->where("id", $user_id)->orderBy("id", "DESC")->get();
+        $data = User::with(['wishlists.product'])->where("id", $user_id)->orderBy("id", "DESC")->get();
         return json_encode($data);
+    }
+    public function deleteCartItem($id)
+    {
+        $item =  Wishlist::find($id)->delete();
+        return json_encode([
+            "item" => $item,
+            "message" => "This Item Deleted From Wishlist",
+            "status" => 2002
+        ]);
     }
 }

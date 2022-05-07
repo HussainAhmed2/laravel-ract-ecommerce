@@ -9,12 +9,12 @@ class Wishlist extends Model
 {
     use HasFactory;
 
-    public function products()
+    public function product()
     {
-        return $this->hasMany(Product::class, 'id', 'product_id');
+        return $this->belongsTo(Product::class, "product_id", "id");
     }
     public function users()
     {
-        return $this->hasMany(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, "id", "user_id");
     }
 }

@@ -157,3 +157,21 @@ export const fetchUserWishlistAction = (token, user_id) => async (dispatch) => {
         });
     });
 };
+
+export const deleteItemFromWishlistAction =
+    (token, item_id) => async (dispatch) => {
+        await apiClient.deleteItemFromWishlist(token, item_id).then((res) => {
+            dispatch({
+                type: UserTypes.DELETE_FROM_WHISHLIST,
+            });
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: res.data.message,
+                showCancelButton: false,
+                showConfirmButton: false,
+                button: false,
+                timer: 2000,
+            });
+        });
+    };
