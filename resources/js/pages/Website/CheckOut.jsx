@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import Breadcrumbs from "./components/Breadcrumbs";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import CartItemsPrices from "./components/widgets/Cart/CartItemsPrices";
 import CheckoutForm from "./components/widgets/Checkout/CheckoutForm";
 import CheckoutMethods from "./components/widgets/Checkout/CheckoutMethods";
 

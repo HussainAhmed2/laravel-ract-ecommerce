@@ -18,7 +18,8 @@ export const user_login = (postData, history) => async (dispatch) => {
                 icon: "success",
                 title: "Login Success",
                 text: "Wellcome !",
-                button: false,
+                showCancelButton: false,
+                showConfirmButton: false,
                 timer: 2000,
             }).then(() => {
                 history.push("/" + any_dir);
@@ -50,7 +51,8 @@ export const user_login_model = (postData, history) => async (dispatch) => {
                 icon: "success",
                 title: "Login Success",
                 text: "Now you process checkout",
-                button: false,
+                showCancelButton: false,
+                showConfirmButton: false,
                 timer: 2000,
             }).then(() => {
                 history.push("checkout");
@@ -86,6 +88,8 @@ export const registerAction = (postData) => async (dispatch) => {
                     icon: "success",
                     title: "Success",
                     text: res.response,
+                    showCancelButton: false,
+                    showConfirmButton: false,
                     button: false,
                     timer: 2000,
                 });

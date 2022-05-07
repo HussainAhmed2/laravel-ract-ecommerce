@@ -22,3 +22,13 @@ export const createOrderReducer = (state = initState, { type, payload }) => {
             return state;
     }
 };
+
+export const fetchOrderReducer = (state = [], { type, payload }) => {
+    switch (type) {
+        case OrderTypes.SINGLE_ORDER:
+            return { ...state, Order: payload };
+
+        default:
+            return state;
+    }
+};

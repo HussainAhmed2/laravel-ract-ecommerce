@@ -4,7 +4,10 @@ import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import { CartReducers } from "../Reducers/Cart.Reducers";
 import { CheckoutPaymentReducer } from "../Reducers/Checkout.Reducers";
-import { createOrderReducer } from "../Reducers/Order.Reducers";
+import {
+    createOrderReducer,
+    fetchOrderReducer,
+} from "../Reducers/Order.Reducers";
 import {
     GetProductReducer,
     ProductStoreReducer,
@@ -17,7 +20,7 @@ import {
 const persistCartConfig = {
     key: "cart",
     storage: storage,
-    whitelist: ["CART"],
+    whitelist: ["CART", "CREATE_ORDER"],
 };
 
 const persistAuthConfig = {
@@ -41,6 +44,7 @@ const rootReducers = combineReducers({
     CART: CartReducers,
     CHECKOUT_PAYMENT: CheckoutPaymentReducer,
     CREATE_ORDER: createOrderReducer,
+    SINGLE_ORDER: fetchOrderReducer,
 });
 
 export default persistReducer(persistCartConfig, rootReducers);

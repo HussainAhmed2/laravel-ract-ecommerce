@@ -2,6 +2,7 @@ import { OrderTypes } from "../Types/Order.Types";
 import apiClient from "../../config/endpoints";
 import Swal from "sweetalert2";
 import storage from "redux-persist/lib/storage";
+import { CartTypes } from "../Types/Cart.Types";
 
 let any_dir = process.env.MIX_SUB_DIR || "";
 
@@ -13,15 +14,21 @@ export const createOrderAction =
                     type: OrderTypes.CREATE_ORDER,
                     payload: res.data,
                 });
-                storage.removeItem("persist:cart");
+
                 Swal.fire({
                     icon: "success",
                     title: "Success",
                     text: res.data.message,
-                    button: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
                     timer: 2000,
                 }).then(() => {
-                    history.push("OrderConfirm");
+                    storage.removeItem("persist:cart").then(() => {
+                        dispatch({
+                            type: CartTypes.EMPTY_CART,
+                        });
+                        history.push("OrderConfirm");
+                    });
                 });
             } else {
                 dispatch({
@@ -31,3 +38,12 @@ export const createOrderAction =
             }
         });
     };
+
+export const fetchSingleOrderAction = (token, order_no) => async (dispatch) => {
+    await apiClient.fetchSingleOrder(token, order_no).then((res) => {
+        dispatch({
+            type: OrderTypes.SINGLE_ORDER,
+            payload: res.data,
+        });
+    });
+};

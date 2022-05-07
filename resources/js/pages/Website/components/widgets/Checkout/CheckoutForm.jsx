@@ -2,26 +2,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { v4 as uuid } from "uuid";
-import { emptyCartAction } from "../../../../../Redux/Actions/Cart.Actions";
 import { createOrderAction } from "../../../../../Redux/Actions/Order.Actions";
 const CheckoutForm = () => {
     const { User } = useSelector((state) => state.USER_LOGIN);
     const { Carts } = useSelector((state) => state.CART);
     const { message } = useSelector((state) => state.CREATE_ORDER.Validation);
     let userid = User.user.id;
-    let ListCart = [];
-    let QuantityList = [];
-    let ProductAmount = [];
     let SubTotalCart = 0;
     let GrantTotalCart = 0;
     let shipmentCost = 50;
     Object.keys(Carts).forEach(function (item) {
-        ListCart.push(Carts[item].id);
-        QuantityList.push(Carts[item].quantity);
-        ProductAmount.push(Carts[item].quantity * Carts[item].product_price);
         SubTotalCart += Carts[item].quantity * Carts[item].product_price;
     });
-    console.log("Product Amount", ProductAmount);
     GrantTotalCart = SubTotalCart + shipmentCost;
     const token = User?.token;
     const unique_id = uuid();
@@ -47,34 +39,32 @@ const CheckoutForm = () => {
     const checkoutHandle = (e) => {
         e.preventDefault();
         setIsSubmit(true);
-
         const postData = new FormData();
         postData.append("order_no", order_no);
         postData.append("user_id", userid);
-        postData.append("order_amount", GrantTotalCart);
         postData.append("address", Address);
         postData.append("country", Country);
         postData.append("city", City);
         postData.append("state", State);
         postData.append("zip", Zip);
         postData.append("payment_method", "COD");
-        ListCart.forEach((item) => {
-            postData.append("product_id[]", item);
+        postData.append("order_amount", GrantTotalCart);
+        Object.keys(Carts).forEach(function (item) {
+            postData.append("product_id[]", Carts[item].id);
+            postData.append("quantity[]", Carts[item].quantity);
+            postData.append(
+                "amount[]",
+                Carts[item].quantity * Carts[item].product_price
+            );
         });
-        QuantityList.forEach((item) => {
-            postData.append("quantity[]", item);
+        dispatch(createOrderAction(token, postData, history)).then(() => {
+            setIsSubmit(false);
         });
-        ProductAmount.forEach((item) => {
-            postData.append("amount[]", item);
-        });
-        dispatch(createOrderAction(token, postData, history));
-        dispatch(emptyCartAction());
-        setIsSubmit(false);
     };
 
     React.useEffect(() => {
         auth();
-    }, [token, isSubmit]);
+    }, [token]);
 
     return (
         <>
@@ -113,6 +103,15 @@ const CheckoutForm = () => {
                                 <option value="Albania">Albania</option>
                                 <option value="PAkistan">Pakistan</option>
                             </select>
+                            {message.country ? (
+                                <>
+                                    <p className="text-danger">
+                                        {message.country}
+                                    </p>
+                                </>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col-md-6">
                             <label>City</label>
@@ -122,6 +121,15 @@ const CheckoutForm = () => {
                                 placeholder="City"
                                 onChange={(e) => setCity(e.target.value)}
                             />
+                            {message.city ? (
+                                <>
+                                    <p className="text-danger">
+                                        {message.city}
+                                    </p>
+                                </>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col-md-6">
                             <label>State</label>
@@ -131,6 +139,15 @@ const CheckoutForm = () => {
                                 placeholder="State"
                                 onChange={(e) => setState(e.target.value)}
                             />
+                            {message.state ? (
+                                <>
+                                    <p className="text-danger">
+                                        {message.state}
+                                    </p>
+                                </>
+                            ) : (
+                                ""
+                            )}
                         </div>
                         <div className="col-md-6">
                             <label>ZIP Code</label>
@@ -140,6 +157,13 @@ const CheckoutForm = () => {
                                 placeholder="ZIP Code"
                                 onChange={(e) => setZip(e.target.value)}
                             />
+                            {message.zip ? (
+                                <>
+                                    <p className="text-danger">{message.zip}</p>
+                                </>
+                            ) : (
+                                ""
+                            )}
                         </div>
 
                         <div className="checkout-btn d-flex justify-content-end mt-4">

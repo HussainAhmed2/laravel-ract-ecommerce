@@ -54,14 +54,17 @@ class CheckoutController extends Controller
             $order->save();
             $Productcounts = count($request->product_id);
             $Productarray = array();
+
+
             for ($i = 0; $i < $Productcounts; $i++) {
-                $Productarray[]    =  array("order_no" => $request->order_no, "product_id" => $request->product_id[$i], "quantity" => $request->quantity[$i], "amount" => $request->amount[$i]);
+                $Productarray[]    =  array("order_no" => $request->order_no, "order_id" => $order->id, "product_id" => $request->product_id[$i], "quantity" => $request->quantity[$i], "amount" => $request->amount[$i]);
             }
 
-            DB::table('order_products')->insert($Productarray);
+            DB::table('order_product')->insert($Productarray);
 
             return json_encode([
-                'message' => ['Order Create Successfully']
+                'message' => ['Order Create Successfully'],
+                "order" => $order
             ], 200);
         }
     }
