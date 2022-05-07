@@ -22,13 +22,14 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('product-list', [ProductController::class, 'index'])->name('product-list');
     Route::post('createOrder', [WebCheckoutController::class, 'createOrder']);
+    Route::get('getOrder/{id}', [OrderController::class, 'getOrder']);
+
+    Route::get('user/getOrders/{id}', [UserController::class, 'getOrders']);
+    Route::post('user/addToWishlist', [UserController::class, 'addToWishlist']);
 });
 
 Route::post('auth/login', [AuthController::class, 'ApiLogin']);
-
 Route::post('auth/registerUser', [AuthController::class, 'registerUser']);
+Route::get('getProducts', [WebProductController::class, 'getProducts']);;
 
-Route::get('getProducts', [WebProductController::class, 'getProducts']);
-
-Route::get('getOrder/{id}', [OrderController::class, 'getOrder']);
-Route::get('user/getOrders/{id}', [UserController::class, 'getOrders']);
+Route::get('user/getUserWhislist/{user_id}', [UserController::class, 'getUserWhislist']);

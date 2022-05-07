@@ -2,15 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { logOutAction } from "../../../Redux/Actions/User.Actions";
+import {
+    fetchUserWishlistAction,
+    logOutAction,
+} from "../../../Redux/Actions/User.Actions";
 import Swal from "sweetalert2";
 
 const Header = () => {
     const { User } = useSelector((state) => state.USER_LOGIN);
+    const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
     const { numberCart } = useSelector((state) => state.CART);
+    const [isWishlistloaded, setIsWishlistloaded] = React.useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
     const token = User?.token;
+    const userid = User.user.id;
     const url = process.env.MIX_APP_URL || "";
     const startScript = () => {
         const script = document.createElement("script");
@@ -37,7 +43,10 @@ const Header = () => {
 
     useEffect(() => {
         startScript();
-    }, [url]);
+        dispatch(fetchUserWishlistAction(token, userid)).then(() => {
+            setIsWishlistloaded(true);
+        });
+    }, [isWishlistloaded]);
     return (
         <>
             <div className="top-bar">
@@ -181,13 +190,23 @@ const Header = () => {
                         </div>
                         <div className="col-md-3">
                             <div className="user">
-                                <a
-                                    href="wishlist.html"
-                                    className="btn wishlist"
-                                >
-                                    <i className="fa fa-heart"></i>
-                                    <span>(0)</span>
-                                </a>
+                                {!isWishlistloaded ? (
+                                    <></>
+                                ) : (
+                                    <>
+                                        <Link
+                                            to={"Wishlist"}
+                                            href="wishlist.html"
+                                            className="btn wishlist"
+                                        >
+                                            <i className="fa fa-heart"></i>
+                                            <span>
+                                                ({Wishlist[0].wishlists.length})
+                                            </span>
+                                        </Link>
+                                    </>
+                                )}
+
                                 <Link to={"Cart"} className="btn cart">
                                     <i className="fa fa-shopping-cart"></i>
                                     <span>({numberCart})</span>

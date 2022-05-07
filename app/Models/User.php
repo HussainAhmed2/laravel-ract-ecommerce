@@ -48,4 +48,12 @@ class User extends Authenticatable
             Order::class
         );
     }
+    public function wishlists()
+    {
+        return $this->hasMany(
+            Wishlist::class,
+            "user_id",
+            "id"
+        );
+    }
 }

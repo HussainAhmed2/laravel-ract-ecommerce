@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Wishlist extends Model
 {
     use HasFactory;
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'id', 'product_id');
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id', 'user_id');
+    }
 }

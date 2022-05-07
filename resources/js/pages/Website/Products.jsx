@@ -7,13 +7,18 @@ import Header from "./components/Header";
 import Brands from "./components/widgets/Home/Brands";
 import DetailCardLoader from "./components/widgets/Product/DetailCardLoader";
 import DetailsCard from "./components/widgets/Product/DetailsCard";
-import ProductItems from "./components/widgets/Product/ProductItems";
 import Pagination from "react-js-pagination";
 
 const Products = () => {
+    const { User } = useSelector((state) => state.USER_LOGIN);
+
     const [isloaded, setIsloaded] = React.useState(false);
+
     const dispatch = useDispatch();
     const { Products } = useSelector((state) => state.GET_PRODUCTS);
+    const userid = User.user.id;
+    const token = User?.token;
+
     const fetchMoreData = () => {
         // a fake async api call like which sends
         // 20 more records in 1.5 secs
@@ -23,7 +28,6 @@ const Products = () => {
             });
         }, 1500);
     };
-    console.log("Products =", Products);
     React.useEffect(() => {
         dispatch(fetchProductAction()).then(() => {
             setIsloaded(true);
@@ -72,6 +76,8 @@ const Products = () => {
                                                     product_price={
                                                         product.product_price
                                                     }
+                                                    token={token}
+                                                    user_id={userid}
                                                 />
                                             </>
                                         ))}

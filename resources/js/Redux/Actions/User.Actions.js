@@ -104,3 +104,56 @@ export const registerAction = (postData) => async (dispatch) => {
             console.log("register error", error.response.data.message);
         });
 };
+
+export const fetchUserOrdersAction = (token, user_id) => async (dispatch) => {
+    await apiClient.fetchUserOrders(token, user_id).then((res) => {
+        dispatch({
+            type: UserTypes.USER_GET_ORDERS,
+            payload: res.data,
+        });
+    });
+};
+
+export const addToWishlistAction = (token, postData) => async (dispatch) => {
+    await apiClient
+        .addToWishlist(token, postData)
+        .then((res) => {
+            dispatch({
+                type: UserTypes.ADD_TO_WHISHLIST,
+                payload: res,
+            });
+            if (res.data.status == 2001) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Warning",
+                    text: res.data.message,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    button: false,
+                    timer: 2000,
+                });
+            } else {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: res.data.message,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    button: false,
+                    timer: 2000,
+                });
+            }
+        })
+        .catch((error) => {
+            console.log("register error", error.response.data.message);
+        });
+};
+
+export const fetchUserWishlistAction = (token, user_id) => async (dispatch) => {
+    await apiClient.fetchUserWishlist(token, user_id).then((res) => {
+        dispatch({
+            type: UserTypes.FETCH_WHISHLIST,
+            payload: res.data,
+        });
+    });
+};

@@ -7,7 +7,6 @@ import { CheckoutPaymentReducer } from "../Reducers/Checkout.Reducers";
 import {
     createOrderReducer,
     fetchOrderReducer,
-    fetchUserOrderReducer,
 } from "../Reducers/Order.Reducers";
 import {
     GetProductReducer,
@@ -16,6 +15,8 @@ import {
 import {
     LoginUserReducer,
     RegisterUserRducers,
+    fetchUserOrderReducer,
+    fetchUserWishlistReducer,
 } from "../Reducers/User.Reducers";
 
 const persistCartConfig = {
@@ -47,6 +48,7 @@ const rootReducers = combineReducers({
     CREATE_ORDER: createOrderReducer,
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
+    USER_WISHLIST: fetchUserWishlistReducer,
 });
 
 export default persistReducer(persistCartConfig, rootReducers);

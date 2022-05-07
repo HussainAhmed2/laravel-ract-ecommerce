@@ -31,4 +31,12 @@ class Product extends Model
             Order::class,
         );
     }
+    public function wishlists()
+    {
+        return $this->belongsTo(
+            Wishlist::class,
+            'product_id',
+            'id'
+        );
+    }
 }

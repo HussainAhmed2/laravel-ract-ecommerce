@@ -1,12 +1,22 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AddCart } from "../../../../../Redux/Actions/Cart.Actions";
+import {
+    addToWishlistAction,
+    fetchUserWishlistAction,
+} from "../../../../../Redux/Actions/User.Actions";
 
 const DetailsCard = (props) => {
+    const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
     const dispatch = useDispatch();
     const url = process.env.MIX_APP_URL || "";
+    const [isloaded, setIsloaded] = React.useState(false);
+    const [isFound, setIsFound] = React.useState(false);
+    const product_id = props.id;
     var AverageRating = parseFloat(props.avgRatings).toFixed(2);
+
+    const token = props.token;
     console.log("average rating", AverageRating);
     const secondExample = {
         count: 5,
@@ -22,6 +32,17 @@ const DetailsCard = (props) => {
     const SubmitAddCart = (item) => {
         dispatch(AddCart(item));
     };
+    const SubmitAddtoWishlist = () => {
+        const postData = new FormData();
+        postData.append("product_id", props.id);
+        postData.append("user_id", props.user_id);
+        dispatch(addToWishlistAction(token, postData)).then(() => {
+            dispatch(fetchUserWishlistAction(token, props.user_id));
+            setIsloaded(true);
+        });
+    };
+
+    React.useEffect(() => {}, [isloaded]);
     return (
         <>
             <div className="col-md-3">
@@ -50,9 +71,21 @@ const DetailsCard = (props) => {
                             >
                                 <i className="fa fa-cart-plus"></i>
                             </a>
-                            <a href="#">
-                                <i className="fa fa-heart"></i>
-                            </a>
+                            {!token ? (
+                                <></>
+                            ) : (
+                                <>
+                                    <a
+                                        type="button"
+                                        onClick={() =>
+                                            SubmitAddtoWishlist(props)
+                                        }
+                                    >
+                                        <i className="fa fa-heart"></i>
+                                    </a>
+                                </>
+                            )}
+
                             <a href="#">
                                 <i className="fa fa-search"></i>
                             </a>
@@ -63,8 +96,12 @@ const DetailsCard = (props) => {
                             <span>$</span>
                             {props.product_price}
                         </h3>
-                        <a className="btn" href="">
-                            <i className="fa fa-shopping-cart"></i>Buy Now
+                        <a
+                            className="btn"
+                            type="button"
+                            onClick={() => SubmitAddCart(props)}
+                        >
+                            <i className="fa fa-shopping-cart"></i>Add to Cart
                         </a>
                     </div>
                 </div>

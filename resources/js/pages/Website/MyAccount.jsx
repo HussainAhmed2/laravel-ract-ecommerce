@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserOrdersAction } from "../../Redux/Actions/Order.Actions";
+import { fetchUserOrdersAction } from "../../Redux/Actions/User.Actions";
 import moment from "moment";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -11,7 +11,6 @@ const MyAccount = () => {
     const { User } = useSelector((state) => state.USER_LOGIN);
     const { UserOrders } = useSelector((state) => state.USER_ORDERS);
     const { Order } = useSelector((state) => state.SINGLE_ORDER);
-    console.log("orders", UserOrders);
     let userid = User.user.id;
     const token = User?.token;
     const url = process.env.MIX_APP_URL || "";

@@ -44,6 +44,21 @@ const fetchUserOrders = (token, user_id) =>
         },
     });
 
+const addToWishlist = (token, postData) =>
+    apiClient.post("user/addToWishlist", postData, {
+        headers: {
+            "content-type": "application/json; multipart/form-data",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+const fetchUserWishlist = (token, user_id) =>
+    apiClient.get(`user/getUserWhislist/${user_id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
 export default {
@@ -55,4 +70,6 @@ export default {
     createOrder,
     fetchSingleOrder,
     fetchUserOrders,
+    addToWishlist,
+    fetchUserWishlist,
 };
