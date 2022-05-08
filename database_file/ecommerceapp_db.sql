@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 05, 2022 at 08:11 PM
+-- Generation Time: May 08, 2022 at 06:47 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.4.0
 
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `migrations`
@@ -177,7 +177,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2022_04_24_164020_create_brands_table', 1),
 (12, '2022_04_24_164306_create_wishlists_table', 1),
 (13, '2022_05_03_173544_add_new_fields_in_order_table', 2),
-(14, '2022_05_03_174615_create_order__products_table', 3);
+(14, '2022_05_03_174615_create_order__products_table', 3),
+(15, '2022_05_06_214657_order_and_product_relation', 4),
+(16, '2022_05_07_220555_product_brand_category_relation', 5);
 
 -- --------------------------------------------------------
 
@@ -204,48 +206,45 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `order_no`, `order_amount`, `order_status`, `address`, `country`, `city`, `state`, `zip`, `payment_method`, `source`, `shipment_cost`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(19, 2, '03dc1c7f', 1571, '1', 'Voluptatibus quia vo', 'United States', 'Ut repellendus Pari', 'Necessitatibus offic', 29, 'COD', 'web', 50, '2022-05-05 14:48:06', '2022-05-05 14:48:06', NULL),
-(20, 2, 'f5835bdb', 522, '1', 'Autem omnis consecte', 'Albania', 'Officia sint nulla r', 'Commodi quaerat volu', 35, 'COD', 'web', 50, '2022-05-05 14:52:34', '2022-05-05 14:52:34', NULL),
-(21, 2, 'aac713d9', 522, '1', 'Tempor culpa pariatu', 'Afghanistan', 'Ut quos sit molliti', 'Qui fugiat nesciunt', 74, 'COD', 'web', 50, '2022-05-05 14:53:18', '2022-05-05 14:53:18', NULL);
+(34, 2, '95c9fe94', 1351, '1', 'Qui nulla nisi itaqu', 'Albania', 'Nulla qui sint asper', 'Consectetur consequa', 64, 'COD', 'web', 50, '2022-05-07 06:07:37', '2022-05-07 06:07:37', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_products`
+-- Table structure for table `order_product`
 --
 
-DROP TABLE IF EXISTS `order_products`;
-CREATE TABLE IF NOT EXISTS `order_products` (
+DROP TABLE IF EXISTS `order_product`;
+CREATE TABLE IF NOT EXISTS `order_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(50) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `order_product_product_id_foreign` (`product_id`),
+  KEY `order_product_order_id_foreign` (`order_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `order_products`
+-- Dumping data for table `order_product`
 --
 
-INSERT INTO `order_products` (`id`, `order_no`, `product_id`, `quantity`, `amount`, `created_at`, `update_at`, `deleted_at`) VALUES
-(41, 'aac713d9', 199, 1, 334, '2022-05-05 19:53:18', '2022-05-05 19:53:18', NULL),
-(40, 'f5835bdb', 198, 1, 138, '2022-05-05 19:52:34', '2022-05-05 19:52:34', NULL),
-(39, 'f5835bdb', 199, 1, 334, '2022-05-05 19:52:34', '2022-05-05 19:52:34', NULL),
-(38, '03dc1c7f', 195, 1, 475, '2022-05-05 19:48:07', '2022-05-05 19:48:07', NULL),
-(37, '03dc1c7f', 193, 1, 378, '2022-05-05 19:48:07', '2022-05-05 19:48:07', NULL),
-(36, '03dc1c7f', 199, 2, 668, '2022-05-05 19:48:07', '2022-05-05 19:48:07', NULL),
-(42, 'aac713d9', 198, 1, 138, '2022-05-05 19:53:18', '2022-05-05 19:53:18', NULL);
+INSERT INTO `order_product` (`id`, `order_no`, `product_id`, `order_id`, `quantity`, `amount`, `created_at`, `update_at`, `deleted_at`) VALUES
+(67, '95c9fe94', 198, 34, 1, 138, '2022-05-07 11:07:37', '2022-05-07 11:07:37', NULL),
+(66, '95c9fe94', 199, 34, 2, 668, '2022-05-07 11:07:37', '2022-05-07 11:07:37', NULL),
+(65, '95c9fe94', 200, 34, 1, 495, '2022-05-07 11:07:37', '2022-05-07 11:07:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -281,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `personal_access_tokens`
@@ -302,7 +301,9 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (12, 'App\\Models\\User', 2, 'my-app-token', '418309bb953680a28aabf5a74896e05ed886e39807c83ff23ac448fbbfaa851c', '[\"*\"]', NULL, '2022-05-05 02:41:10', '2022-05-05 02:41:10'),
 (13, 'App\\Models\\User', 2, 'my-app-token', '95c2db1b924ce2a29629d6d2335eecc72659a7c7ff8824715fb8c41ea13ddada', '[\"*\"]', NULL, '2022-05-05 04:10:06', '2022-05-05 04:10:06'),
 (14, 'App\\Models\\User', 2, 'my-app-token', '6f3a7fb61421272e72ba54f5e7374c72eac89647f60b0a84634ac453ee33b732', '[\"*\"]', NULL, '2022-05-05 04:21:21', '2022-05-05 04:21:21'),
-(15, 'App\\Models\\User', 2, 'my-app-token', '05aaa9d564e5f32b0c22323b91168a00b95114e2e61fc8105d678517c84c8745', '[\"*\"]', NULL, '2022-05-05 04:31:27', '2022-05-05 04:31:27');
+(15, 'App\\Models\\User', 2, 'my-app-token', '05aaa9d564e5f32b0c22323b91168a00b95114e2e61fc8105d678517c84c8745', '[\"*\"]', '2022-05-07 10:45:35', '2022-05-05 04:31:27', '2022-05-07 10:45:35'),
+(16, 'App\\Models\\User', 2, 'my-app-token', '2632bd9401d6aaf63137643c4882b31df9dbed7257b174854936a9df3cdab614', '[\"*\"]', '2022-05-07 12:52:34', '2022-05-07 11:53:33', '2022-05-07 12:52:34'),
+(17, 'App\\Models\\User', 2, 'my-app-token', 'a2aa40286454cede4ac1051da68aa0be4a7864c63bd2413ec7f928a35a8882ee', '[\"*\"]', '2022-05-08 13:44:30', '2022-05-07 12:58:57', '2022-05-08 13:44:30');
 
 -- --------------------------------------------------------
 
@@ -324,7 +325,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `products_category_id_foreign` (`category_id`),
+  KEY `products_brand_id_foreign` (`brand_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=202 DEFAULT CHARSET=utf8;
 
 --
@@ -1941,7 +1944,14 @@ CREATE TABLE IF NOT EXISTS `wishlists` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `wishlists`
+--
+
+INSERT INTO `wishlists` (`id`, `product_id`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(26, 199, 2, '2022-05-07 15:46:24', '2022-05-07 15:46:24', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
