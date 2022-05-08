@@ -54,3 +54,14 @@ export const storeProductAction =
                 console.log("Store Product Error", error);
             });
     };
+export const getSingleProductAction = (product_id) => async (dispatch) => {
+    await apiClient
+        .getSingleProduct(product_id)
+        .then((res) => {
+            dispatch({
+                type: ProductTypes.GET_SINGLE_PRODUCT,
+                payload: res.data,
+            });
+        })
+        .catch((error) => console.error("fetch product Error", error.response));
+};

@@ -3,6 +3,7 @@ import ReactStars from "react-rating-stars-component";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AddCart } from "../../../../../Redux/Actions/Cart.Actions";
+import { Link } from "react-router-dom";
 import {
     addToWishlistAction,
     fetchUserWishlistAction,
@@ -12,6 +13,7 @@ const DetailsCard = (props) => {
     const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
     const dispatch = useDispatch();
     const history = useHistory();
+    let any_dir = process.env.MIX_SUB_DIR || "";
     const url = process.env.MIX_APP_URL || "";
     const [isloaded, setIsloaded] = React.useState(false);
     const [isFound, setIsFound] = React.useState(false);
@@ -44,8 +46,8 @@ const DetailsCard = (props) => {
         });
     };
 
-    const GoToProducts = () => {
-        history.push("ProductDetails");
+    const GoToProducts = (productid) => {
+        history.push(`ProductDetails/${productid}`);
     };
 
     React.useEffect(() => {}, [isloaded]);
@@ -92,9 +94,13 @@ const DetailsCard = (props) => {
                                 </>
                             )}
 
-                            <a type="button" onClick={() => GoToProducts()}>
+                            <Link
+                                to={
+                                    "/" + any_dir + `ProductDetails/${props.id}`
+                                }
+                            >
                                 <i className="fa fa-search"></i>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="product-price">

@@ -2396,7 +2396,10 @@ h2 {
 }
 
 
-
+p{
+    word-break: break-all;
+    white-space: normal;
+}
 
 
 @media(max-width:767px) {

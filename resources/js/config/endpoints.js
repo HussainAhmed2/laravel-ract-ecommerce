@@ -65,6 +65,8 @@ const deleteItemFromWishlist = (token, item_id) =>
             Authorization: `Bearer ${token}`,
         },
     });
+const getSingleProduct = (product_id) =>
+    apiClient.get(`getSingleProduct/${product_id}`);
 
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
@@ -81,4 +83,5 @@ export default {
     addToWishlist,
     fetchUserWishlist,
     deleteItemFromWishlist,
+    getSingleProduct,
 };

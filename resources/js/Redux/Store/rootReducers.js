@@ -10,6 +10,7 @@ import {
 } from "../Reducers/Order.Reducers";
 import {
     GetProductReducer,
+    GetSingleProductReducer,
     ProductStoreReducer,
 } from "../Reducers/Product.Reducers";
 import {
@@ -49,6 +50,7 @@ const rootReducers = combineReducers({
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
     USER_WISHLIST: persistReducer(persistAuthConfig, fetchUserWishlistReducer),
+    SINGLE_PRODUCT: GetSingleProductReducer,
 });
 
 export default persistReducer(persistCartConfig, rootReducers);

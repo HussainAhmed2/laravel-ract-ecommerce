@@ -45,11 +45,12 @@ function Main() {
                     <Route exact path={"/" + any_dir} component={Home} />
                     <Route path={"/" + any_dir + "Home"} component={Home} />
                     <Route
+                        exact
                         path={"/" + any_dir + "Products"}
                         component={Products}
                     />
                     <Route
-                        path={"/" + any_dir + "ProductDetails"}
+                        path={"/" + any_dir + "ProductDetails/:productID"}
                         component={ProductDetails}
                     />
 

@@ -47,12 +47,3 @@ export const fetchSingleOrderAction = (token, order_no) => async (dispatch) => {
         });
     });
 };
-
-export const fetchUserOrdersAction = (token, user_id) => async (dispatch) => {
-    await apiClient.fetchUserOrders(token, user_id).then((res) => {
-        dispatch({
-            type: OrderTypes.USER_GET_ORDERS,
-            payload: res.data,
-        });
-    });
-};

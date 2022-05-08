@@ -18,6 +18,7 @@ const Header = () => {
     const token = User?.token;
     const userid = User.user.id;
     const url = process.env.MIX_APP_URL || "";
+    let any_dir = process.env.MIX_SUB_DIR || "";
     const startScript = () => {
         const script = document.createElement("script");
         script.src = url + "public/WebsiteAssets/js/main.js";
@@ -84,13 +85,13 @@ const Header = () => {
                         >
                             <div className="navbar-nav mr-auto">
                                 <Link
-                                    to="Home"
+                                    to={"/" + any_dir + "Home"}
                                     className="nav-item nav-link active"
                                 >
                                     <a className="nav-item nav-link">Home</a>
                                 </Link>
                                 <Link
-                                    to="Products"
+                                    to={"/" + any_dir + "Products"}
                                     className="nav-item nav-link active"
                                 >
                                     <a className="nav-item nav-link">
@@ -100,7 +101,7 @@ const Header = () => {
                                 {token ? (
                                     <>
                                         <Link
-                                            to="MyAccount"
+                                            to={"/" + any_dir + "MyAccount"}
                                             className="nav-item nav-link active"
                                         >
                                             <a className="nav-item nav-link">

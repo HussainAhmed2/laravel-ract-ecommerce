@@ -47,6 +47,7 @@ class ProductController extends Controller
                 "products.product_price",
                 "products.category_id",
                 "products.brand_id",
+                "products.description",
                 DB::raw('AVG(product__ratings.rating) as AverageRating')
             )
 
@@ -56,6 +57,7 @@ class ProductController extends Controller
             ->groupBy('products.product_price')
             ->groupBy('products.category_id')
             ->groupBy('products.brand_id')
+            ->groupBy('products.description')
             ->where("products.id", $id)->get();
         return json_encode($data);
     }
