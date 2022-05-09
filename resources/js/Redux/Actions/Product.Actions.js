@@ -96,3 +96,8 @@ export const storeProductRatingAction =
                 console.log("Store Product Error", error);
             });
     };
+export const RatingremoveValidationErrors = () =>{
+    return {
+        type: ProductTypes.REMOVE_PRODUCT_RATING_VALIDATION_ERRORS
+    }
+}

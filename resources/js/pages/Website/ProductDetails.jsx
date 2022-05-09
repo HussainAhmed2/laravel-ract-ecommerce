@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getSingleProductAction, storeProductRatingAction } from "../../Redux/Actions/Product.Actions";
+import { getSingleProductAction, RatingremoveValidationErrors, storeProductRatingAction } from "../../Redux/Actions/Product.Actions";
 import ReactStars from "react-rating-stars-component";
 import moment from "moment";
 import Breadcrumbs from "./components/Breadcrumbs";
@@ -10,7 +10,9 @@ import Header from "./components/Header";
 import { AddCart } from "../../Redux/Actions/Cart.Actions";
 
 const ProductDetails = () => {
+    const { message } = useSelector((state) => state.PRODUCT_RATING.Validation);
     const appUrl = process.env.MIX_APP_URL || "";
+    console.log("message" ,message)
     const startScript = () => {
         const script = document.createElement("script");
         script.src = appUrl + "public/WebsiteAssets/js/main.js";
@@ -30,7 +32,8 @@ const ProductDetails = () => {
     const SubmitAddCart = (item) => {
         dispatch(AddCart(item));
     };
-    const SubmitRating = () =>{
+    const SubmitRating = (e) =>{
+        e.preventDefault()
 
         setisSubmitRating(true)
         const postData = new FormData();
@@ -50,7 +53,14 @@ const ProductDetails = () => {
         dispatch(getSingleProductAction(productID)).then(() => {
             setIsloaded(true);
         });
+
+
     }, [productID, isloaded,isSubmitRating]);
+    React.useEffect(() => {
+        return () => {
+            dispatch(RatingremoveValidationErrors())
+          };
+    },[]);
     return (
         <>
             <Header />
@@ -290,6 +300,7 @@ const ProductDetails = () => {
                                                                         }
                                                                     />
                                                                 </div>
+
                                                                 <p>
                                                                     {
                                                                         rating.review
@@ -332,7 +343,9 @@ const ProductDetails = () => {
                                                                         }
                                                                         onChange={(newRating)=>{SetRating(newRating)}}
                                                                     />
+
                                                         </div>
+                                                        <span className="text-danger">{message.rating[0]}</span>
                                                         <div className="row form">
                                                             <div className="col-sm-6">
                                                                 <input
@@ -340,6 +353,7 @@ const ProductDetails = () => {
                                                                     placeholder="Name"
                                                                     onChange={(e)=>{SetName(e.target.value)}}
                                                                 />
+                                                                <span className="text-danger">{message.name[0]}</span>
                                                             </div>
                                                             <div className="col-sm-6">
                                                                 <input
@@ -347,9 +361,11 @@ const ProductDetails = () => {
                                                                     placeholder="Email"
                                                                     onChange={(e)=>{SetEmail(e.target.value)}}
                                                                 />
+                                                                <span className="text-danger">{message.email[0]}</span>
                                                             </div>
                                                             <div className="col-sm-12">
                                                                 <textarea placeholder="Review"  onChange={(e)=>{SetReview(e.target.value)}}></textarea>
+                                                                <span className="text-danger">{message.review[0]}</span>
                                                             </div>
                                                             <div className="col-sm-12">
                                                                 <button type="button" onClick={SubmitRating}>
