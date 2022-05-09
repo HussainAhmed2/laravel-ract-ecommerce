@@ -17,7 +17,7 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="col-lg-3 col-md-6">
                         <div className="footer-widget">
                             <h2>Follow Us</h2>
@@ -55,13 +55,13 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                
+
                 <div className="row payment align-items-center">
                     <div className="col-md-6">
                         <div className="payment-method">
                             <h2>We Accept:</h2>
                             <img src={url +"public/WebsiteAssets/img/payment-method.png"} alt="Payment Method" />
-                            
+
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -79,11 +79,11 @@ const Footer = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 copyright">
-                        <p>Copyright &copy; <a href="https://htmlcodex.com">HTML Codex</a>. All Rights Reserved</p>
+                        <p>GitHub Code <a href="https://github.com/HussainAhmed2/laravel-react-ecommerce">Link </a></p>
                     </div>
 
                     <div className="col-md-6 template-by">
-                        <p>Template By <a href="https://htmlcodex.com">HTML Codex</a></p>
+                        <p>Developed By <a href="https://www.linkedin.com/in/hussain-ahmed-5b2a29108/">Hussain Ahmed</a></p>
                     </div>
                 </div>
             </div>

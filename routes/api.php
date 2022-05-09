@@ -34,5 +34,5 @@ Route::post('auth/registerUser', [AuthController::class, 'registerUser']);
 Route::get('getProducts', [WebProductController::class, 'getProducts']);
 Route::get('getSingleProduct/{id}', [WebProductController::class, 'getSingleProduct']);
 Route::post('productRating', [WebProductController::class, 'product_rating']);
-
+Route::get('searchProducts/{name}', [WebProductController::class, 'searchProducts']);
 

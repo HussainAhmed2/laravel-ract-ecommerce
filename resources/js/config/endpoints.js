@@ -71,6 +71,9 @@ const getSingleProduct = (product_id) =>
 const submitProductRating = (postData) =>
     apiClient.post("productRating", postData);
 
+const productSearchByName = (name) =>
+    apiClient.get(`searchProducts/${name}`);
+
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
 export default {
@@ -88,4 +91,5 @@ export default {
     deleteItemFromWishlist,
     getSingleProduct,
     submitProductRating,
+    productSearchByName,
 };

@@ -42,6 +42,8 @@ export const GetSingleProductReducer = (state = {}, { type, payload }) => {
     switch (type) {
         case ProductTypes.GET_SINGLE_PRODUCT:
             return { ...state, Product: payload };
+            case ProductTypes.FETCH_PRODUCT_NAME:
+                return { ...state, Product: payload };
 
         default:
             return state;

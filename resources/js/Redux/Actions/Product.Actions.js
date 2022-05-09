@@ -101,3 +101,15 @@ export const RatingremoveValidationErrors = () =>{
         type: ProductTypes.REMOVE_PRODUCT_RATING_VALIDATION_ERRORS
     }
 }
+
+export const SearchProductByNameAction = (product_name) => async (dispatch) => {
+    await apiClient
+        .productSearchByName(product_name)
+        .then((res) => {
+            dispatch({
+                type: ProductTypes.FETCH_PRODUCT_NAME,
+                payload: res.data,
+            });
+        })
+        .catch((error) => console.error("fetch product Error", error.response));
+};

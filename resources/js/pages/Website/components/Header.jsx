@@ -7,9 +7,15 @@ import {
     logOutAction,
 } from "../../../Redux/Actions/User.Actions";
 import Swal from "sweetalert2";
+import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { SearchProductByNameAction } from "../../../Redux/Actions/Product.Actions";
 
 const Header = () => {
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [options, setOptions] = React.useState([]);
     const { User } = useSelector((state) => state.USER_LOGIN);
+    const { Product } = useSelector((state) => state.SINGLE_PRODUCT);
+    const filterBy = () => true;
     const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
     const { numberCart } = useSelector((state) => state.CART);
     const [isWishlistloaded, setIsWishlistloaded] = React.useState(false);
@@ -26,6 +32,18 @@ const Header = () => {
         console.log(script);
     };
 
+    const handleSearch = (productName) => {
+        setIsLoading(true);
+
+       dispatch(SearchProductByNameAction(productName))
+          .then(()=>{
+
+
+            setIsLoading(false)
+
+
+          })
+      };
     const logOut = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -44,6 +62,7 @@ const Header = () => {
 
     useEffect(() => {
         startScript();
+
         dispatch(fetchUserWishlistAction(token, userid)).then(() => {
             setIsWishlistloaded(true);
         });
@@ -182,11 +201,26 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="col-md-6">
+
+
+
                             <div className="search">
-                                <input type="text" placeholder="Search" />
-                                <button>
-                                    <i className="fa fa-search"></i>
-                                </button>
+                            <AsyncTypeahead
+                            filterBy={filterBy}
+                            id="async-example"
+                            isLoading={isLoading}
+                            labelKey="login"
+                            minLength={3}
+                            onSearch={handleSearch}
+
+                            placeholder="Search for a Product..."
+                            renderMenuItemChildren={(option, props) => (
+                                <>
+
+                                <span>{Product[0].product_name}</span>
+                                </>
+                            )}
+                            />
                             </div>
                         </div>
                         <div className="col-md-3">
