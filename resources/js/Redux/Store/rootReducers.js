@@ -11,6 +11,7 @@ import {
 import {
     GetProductReducer,
     GetSingleProductReducer,
+    ProductRatingReducer,
     ProductStoreReducer,
 } from "../Reducers/Product.Reducers";
 import {
@@ -24,6 +25,11 @@ const persistCartConfig = {
     key: "cart",
     storage: storage,
     whitelist: ["CART"],
+};
+
+const persistWishlistConfig = {
+    key: "whistelist",
+    storage: storage,
 };
 
 const persistAuthConfig = {
@@ -49,8 +55,10 @@ const rootReducers = combineReducers({
     CREATE_ORDER: createOrderReducer,
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
-    USER_WISHLIST: persistReducer(persistAuthConfig, fetchUserWishlistReducer),
+    USER_WISHLIST: persistReducer(persistWishlistConfig, fetchUserWishlistReducer),
     SINGLE_PRODUCT: GetSingleProductReducer,
+    PRODUCT_RATING: ProductRatingReducer,
+
 });
 
 export default persistReducer(persistCartConfig, rootReducers);

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Product_Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -60,5 +62,47 @@ class ProductController extends Controller
             ->groupBy('products.description')
             ->where("products.id", $id)->get();
         return json_encode($data);
+    }
+
+    public function product_rating(Request $request){
+
+        $rules = [
+            "name" => "required",
+            "email" => "required",
+            "review" => "required",
+            "rating" => "required",
+        ];
+        $messages = [
+            "name.required" => "name is required",
+            "email.required" => "email is required",
+            "review.required" => "review  is required",
+            "rating.required" => "rating is required",
+
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return json_encode(
+                [
+                    'message' => $validator->errors(),
+                    "status" => 404
+                ],
+
+            );
+        } else {
+        $rating = new Product_Rating();
+        $rating->name = $request->name;
+        $rating->email = $request->email;
+        $rating->review = $request->review;
+        $rating->rating = $request->rating;
+        $rating->product_id = $request->product_id;
+
+        $rating->save();
+
+        return json_encode([
+            "message" => "Product Rating Submited"
+        ]);
+
+        }
     }
 }

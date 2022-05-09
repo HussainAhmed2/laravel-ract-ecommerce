@@ -1,24 +1,56 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getSingleProductAction } from "../../Redux/Actions/Product.Actions";
+import { getSingleProductAction, storeProductRatingAction } from "../../Redux/Actions/Product.Actions";
 import ReactStars from "react-rating-stars-component";
 import moment from "moment";
 import Breadcrumbs from "./components/Breadcrumbs";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import { AddCart } from "../../Redux/Actions/Cart.Actions";
 
 const ProductDetails = () => {
+    const appUrl = process.env.MIX_APP_URL || "";
+    const startScript = () => {
+        const script = document.createElement("script");
+        script.src = appUrl + "public/WebsiteAssets/js/main.js";
+        document.body.appendChild(script);
+    };
     const { Product } = useSelector((state) => state.SINGLE_PRODUCT);
     const [isloaded, setIsloaded] = React.useState(false);
+    const [isSubmitRating, setisSubmitRating] = React.useState(false);
     const dispatch = useDispatch();
     const { productID } = useParams();
     const url = process.env.MIX_APP_URL || "";
+    const [Name,SetName] = React.useState("")
+    const [Email,SetEmail] = React.useState("")
+    const [Rating,SetRating] = React.useState("")
+    const [Review,SetReview] = React.useState("")
+
+    const SubmitAddCart = (item) => {
+        dispatch(AddCart(item));
+    };
+    const SubmitRating = () =>{
+
+        setisSubmitRating(true)
+        const postData = new FormData();
+        postData.append("product_id",productID)
+        postData.append("name",Name)
+        postData.append("email",Email)
+        postData.append("review",Review)
+        postData.append("rating",Rating)
+
+        dispatch(storeProductRatingAction(postData)).then(()=>{
+            setisSubmitRating(false)
+        })
+    }
+
     React.useEffect(() => {
+        startScript();
         dispatch(getSingleProductAction(productID)).then(() => {
             setIsloaded(true);
         });
-    }, [productID, isloaded]);
+    }, [productID, isloaded,isSubmitRating]);
     return (
         <>
             <Header />
@@ -136,8 +168,27 @@ const ProductDetails = () => {
 
                                                     <div className="action">
                                                         <a
+                                                        type="button"
                                                             className="btn"
-                                                            href="#"
+
+                                                            onClick={() =>
+                                                                SubmitAddCart(
+                                                                    {
+                                                                        id: Product[0]
+                                                                            .id,
+                                                                        product_image:
+                                                                        Product[0]
+                                                                                .product_image,
+
+                                                                        product_name:
+                                                                        Product[0]
+                                                                                .product_name,
+                                                                        product_price:
+                                                                        Product[0]
+                                                                                .product_price,
+                                                                    }
+                                                                )
+                                                            }
                                                         >
                                                             <i className="fa fa-shopping-cart"></i>
                                                             Add to Cart
@@ -253,31 +304,59 @@ const ProductDetails = () => {
                                                             Give your Review:
                                                         </h4>
                                                         <div className="ratting">
-                                                            <i className="far fa-star"></i>
-                                                            <i className="far fa-star"></i>
-                                                            <i className="far fa-star"></i>
-                                                            <i className="far fa-star"></i>
-                                                            <i className="far fa-star"></i>
+
+                                                            <ReactStars
+                                                                        count={
+                                                                            5
+                                                                        }
+                                                                        value={
+                                                                            0
+                                                                        }
+                                                                        edit={
+                                                                            true
+                                                                        }
+                                                                        a11y={
+                                                                            true
+                                                                        }
+                                                                        isHalf={
+                                                                            true
+                                                                        }
+                                                                        emptyIcon={
+                                                                            <i className="far fa-star" />
+                                                                        }
+                                                                        halfIcon={
+                                                                            <i className="fa fa-star-half-alt" />
+                                                                        }
+                                                                        filledIcon={
+                                                                            <i className="fa fa-star" />
+                                                                        }
+                                                                        onChange={(newRating)=>{SetRating(newRating)}}
+                                                                    />
                                                         </div>
                                                         <div className="row form">
                                                             <div className="col-sm-6">
                                                                 <input
                                                                     type="text"
                                                                     placeholder="Name"
+                                                                    onChange={(e)=>{SetName(e.target.value)}}
                                                                 />
                                                             </div>
                                                             <div className="col-sm-6">
                                                                 <input
                                                                     type="email"
                                                                     placeholder="Email"
+                                                                    onChange={(e)=>{SetEmail(e.target.value)}}
                                                                 />
                                                             </div>
                                                             <div className="col-sm-12">
-                                                                <textarea placeholder="Review"></textarea>
+                                                                <textarea placeholder="Review"  onChange={(e)=>{SetReview(e.target.value)}}></textarea>
                                                             </div>
                                                             <div className="col-sm-12">
-                                                                <button>
+                                                                <button type="button" onClick={SubmitRating}>
+
                                                                     Submit
+
+
                                                                 </button>
                                                             </div>
                                                         </div>

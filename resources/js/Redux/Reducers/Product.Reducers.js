@@ -35,3 +35,15 @@ export const GetSingleProductReducer = (state = {}, { type, payload }) => {
             return state;
     }
 };
+
+export const ProductRatingReducer = (state = {}, { type, payload }) => {
+    switch (type) {
+        case ProductTypes.PRODUCT_RATING:
+            return { ...state, Product: payload };
+        case ProductTypes.PRODUCT_RATING_VALIDATION_ERRORS:
+            return { ...state, Validation: payload };
+
+        default:
+            return state;
+    }
+};

@@ -108,7 +108,7 @@ const Products = () => {
                                                 fetchProductAction(pageNumber)
                                             );
                                         }}
-                                        pageRangeDisplayed={8}
+                                        pageRangeDisplayed={4}
                                         itemClass="page-item"
                                         linkClass="page-link"
                                         firstPageText="First Page"

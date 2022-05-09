@@ -19,7 +19,6 @@ const Home = () => {
         const script = document.createElement("script");
         script.src = appUrl + "public/WebsiteAssets/js/main.js";
         document.body.appendChild(script);
-        console.log(script);
     };
     useEffect(() => {
         startScript();

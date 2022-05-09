@@ -65,3 +65,34 @@ export const getSingleProductAction = (product_id) => async (dispatch) => {
         })
         .catch((error) => console.error("fetch product Error", error.response));
 };
+
+export const storeProductRatingAction =
+    (token, postData, history) => async (dispatch) => {
+        await apiClient
+            .submitProductRating(token, postData)
+            .then((res) => {
+                if (res.data.status == 200) {
+                    dispatch({
+                        type: ProductTypes.PRODUCT_RATING,
+                        payload: res.data,
+                    });
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: res.data.message,
+                        button: false,
+                        timer: 2000,
+                    }).then(() => {
+                        history.push("/");
+                    });
+                } else {
+                    dispatch({
+                        type: ProductTypes.PRODUCT_RATING_VALIDATION_ERRORS,
+                        payload: res.data,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.log("Store Product Error", error);
+            });
+    };

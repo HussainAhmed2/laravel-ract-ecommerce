@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product_Rating extends Model
 {
+
     use HasFactory;
 
     public function Product()

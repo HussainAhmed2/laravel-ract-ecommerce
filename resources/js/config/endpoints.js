@@ -39,7 +39,7 @@ const fetchSingleOrder = (token, order_no) =>
 const fetchUserOrders = (token, user_id) =>
     apiClient.get(`user/getOrders/${user_id}`, {
         headers: {
-            "content-type": "application/json; multipart/form-data",
+
             Authorization: `Bearer ${token}`,
         },
     });
@@ -68,6 +68,9 @@ const deleteItemFromWishlist = (token, item_id) =>
 const getSingleProduct = (product_id) =>
     apiClient.get(`getSingleProduct/${product_id}`);
 
+const submitProductRating = (postData) =>
+    apiClient.post("productRating", postData);
+
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
 export default {
@@ -84,4 +87,5 @@ export default {
     fetchUserWishlist,
     deleteItemFromWishlist,
     getSingleProduct,
+    submitProductRating,
 };

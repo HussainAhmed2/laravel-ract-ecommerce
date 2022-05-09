@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductRating;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,4 +15,6 @@ class ProductController extends Controller
 
         return json_decode($data);
     }
+
+
 }

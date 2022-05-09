@@ -11,7 +11,7 @@ const MyAccount = () => {
     const { User } = useSelector((state) => state.USER_LOGIN);
     const { UserOrders } = useSelector((state) => state.USER_ORDERS);
     const { Order } = useSelector((state) => state.SINGLE_ORDER);
-    let userid = User.user.id;
+    const userid = User.user.id;
     const token = User?.token;
     const url = process.env.MIX_APP_URL || "";
     const [isloaded, setIsloaded] = React.useState(false);
@@ -23,6 +23,7 @@ const MyAccount = () => {
     const dispatch = useDispatch();
 
     const ViewOrder = (order_no) => {
+
         dispatch(fetchSingleOrderAction(token, order_no)).then(() => {
             setSingleOrderloaded(true);
             handleShow();
@@ -38,12 +39,12 @@ const MyAccount = () => {
     React.useEffect(
         () => {
             auth();
-            dispatch(fetchUserOrdersAction(token, userid)).then(() => {
-                setIsloaded(true);
-            });
+            dispatch(fetchUserOrdersAction(token,userid)).then(()=>{
+                setIsloaded(true)
+            })
+
         },
-        isloaded,
-        isSingleOrderloaded
+       [isloaded,isSingleOrderloaded]
     );
     return (
         <>

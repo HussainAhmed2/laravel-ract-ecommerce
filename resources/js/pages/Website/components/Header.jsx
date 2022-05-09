@@ -196,7 +196,7 @@ const Header = () => {
                                 ) : (
                                     <>
                                         <Link
-                                            to={"Wishlist"}
+                                            to={"/" + any_dir + "Wishlist"}
                                             href="wishlist.html"
                                             className="btn wishlist"
                                         >
@@ -208,7 +208,9 @@ const Header = () => {
                                     </>
                                 )}
 
-                                <Link to={"Cart"} className="btn cart">
+                                <Link
+                                to={"/" + any_dir + "Cart"}
+                                className="btn cart">
                                     <i className="fa fa-shopping-cart"></i>
                                     <span>({numberCart})</span>
                                 </Link>
