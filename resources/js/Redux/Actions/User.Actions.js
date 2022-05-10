@@ -73,7 +73,7 @@ export const user_login_model = (postData, history) => async (dispatch) => {
 
 export const logOutAction = (history) => {
     storage.removeItem("persist:auth");
-    history.push("login");
+    history.push("/" + any_dir + "Login");
     return {
         type: UserTypes.USER_LOGOUT,
     };

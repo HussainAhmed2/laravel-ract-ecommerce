@@ -155,7 +155,7 @@ const Header = () => {
                                             }}
                                         >
                                             <a
-                                                href="#"
+
                                                 className="btn btn-danger"
                                             >
                                                 Log Out
