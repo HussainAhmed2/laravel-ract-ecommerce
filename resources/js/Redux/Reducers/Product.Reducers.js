@@ -50,6 +50,19 @@ export const GetSingleProductReducer = (state = {}, { type, payload }) => {
     }
 };
 
+export const GetProductbyNameReducer = (state = {}, { type, payload }) => {
+    switch (type) {
+
+            case ProductTypes.FETCH_PRODUCT_NAME:
+                return { ...state, Product: payload };
+
+        default:
+            return state;
+    }
+};
+
+
+
 export const ProductRatingReducer = (state = initStateRating, { type, payload }) => {
     switch (type) {
         case ProductTypes.PRODUCT_RATING:

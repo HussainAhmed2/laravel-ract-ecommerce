@@ -49,10 +49,11 @@ const ProductDetails = () => {
     }
 
     React.useEffect(() => {
-        startScript();
         dispatch(getSingleProductAction(productID)).then(() => {
             setIsloaded(true);
         });
+        startScript();
+
 
 
     }, [productID, isloaded,isSubmitRating]);
@@ -104,6 +105,9 @@ const ProductDetails = () => {
                                                 </div>
 
                                                 <div className="product-slider-single-nav normal-slider">
+                                                    {!isloaded ? <></> :
+                                                    <>
+                                                    </>}
                                                     {Product[0].priduct_images.map(
                                                         (product, index) => (
                                                             <div

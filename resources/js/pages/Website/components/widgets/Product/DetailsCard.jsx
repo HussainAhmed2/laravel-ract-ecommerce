@@ -46,9 +46,7 @@ const DetailsCard = (props) => {
         });
     };
 
-    const GoToProducts = (productid) => {
-        history.push(`ProductDetails/${productid}`);
-    };
+
 
     React.useEffect(() => {}, [isloaded]);
     return (

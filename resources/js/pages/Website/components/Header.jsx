@@ -7,14 +7,19 @@ import {
     logOutAction,
 } from "../../../Redux/Actions/User.Actions";
 import Swal from "sweetalert2";
-import { AsyncTypeahead } from "react-bootstrap-typeahead";
+import { AsyncTypeahead, Typeahead } from "react-bootstrap-typeahead";
 import { SearchProductByNameAction } from "../../../Redux/Actions/Product.Actions";
+import { range } from "lodash";
+import apiClient from "../../../config/endpoints";
 
 const Header = () => {
+
+
+    const url = process.env.MIX_APP_URL || "";
     const [isLoading, setIsLoading] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const { User } = useSelector((state) => state.USER_LOGIN);
-    const { Product } = useSelector((state) => state.SINGLE_PRODUCT);
+    const { Product } = useSelector((state) => state.SEARCHED_PRODUCT);
     const filterBy = () => true;
     const { Wishlist } = useSelector((state) => state.USER_WISHLIST);
     const { numberCart } = useSelector((state) => state.CART);
@@ -23,7 +28,7 @@ const Header = () => {
     const history = useHistory();
     const token = User?.token;
     const userid = User.user.id;
-    const url = process.env.MIX_APP_URL || "";
+
     let any_dir = process.env.MIX_SUB_DIR || "";
     const startScript = () => {
         const script = document.createElement("script");
@@ -31,42 +36,43 @@ const Header = () => {
         document.body.appendChild(script);
         console.log(script);
     };
-
-    const handleSearch = (productName) => {
+    const options1 = range(0, 1000).map((o) => `Item ${o}`);
+    const [paginate, setPaginate] = React.useState(true);
+    const handleSearch = async (query) => {
         setIsLoading(true);
 
-       dispatch(SearchProductByNameAction(productName))
-          .then(()=>{
+        await apiClient.productSearchByName(query).then((res)=>{
+
+            const options = res.data.map((i) => ({
+
+                avatar_url: i.product_image,
+                id: i.id,
+                login: i.product_name,
+              }));
+
+             console.log("res",res.data)
+             setOptions(options);
+        })
 
 
-            setIsLoading(false)
 
 
-          })
+            setIsLoading(false);
+
       };
-    const logOut = () => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be Log out from this Webiste!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                dispatch(logOutAction(history));
-            }
-        });
-    };
+      const goToProducts = (product_id) =>{
+
+          window.location.href = "/" + any_dir + "ProductDetails/" + product_id
+
+      }
 
     useEffect(() => {
         startScript();
-
         dispatch(fetchUserWishlistAction(token, userid)).then(() => {
             setIsWishlistloaded(true);
         });
-    }, [isWishlistloaded]);
+
+    }, [isWishlistloaded,isLoading]);
     return (
         <>
             <div className="top-bar">
@@ -205,22 +211,38 @@ const Header = () => {
 
 
                             <div className="search">
-                            <AsyncTypeahead
-                            filterBy={filterBy}
-                            id="async-example"
-                            isLoading={isLoading}
-                            labelKey="login"
-                            minLength={3}
-                            onSearch={handleSearch}
+                             <AsyncTypeahead
+                                filterBy={filterBy}
+                                id="async-example"
+                                isLoading={isLoading}
+                                labelKey="login"
+                                minLength={2}
+                                onSearch={handleSearch}
+                                options={options}
+                                paginate={paginate}
+                                placeholder="Search Product by Name..."
+                                renderMenuItemChildren={(option, props) => (
+                                        <>
+                                        <Link  onClick={()=>{goToProducts(option.id)}}>
 
-                            placeholder="Search for a Product..."
-                            renderMenuItemChildren={(option, props) => (
-                                <>
-
-                                <span>{Product[0].product_name}</span>
-                                </>
-                            )}
-                            />
+                                        <img
+                                            alt={option.login}
+                                            src={
+                                                url +
+                                                "public/uploads/images/" +
+                                                option.avatar_url
+                                            }
+                                            style={{
+                                            height: '24px',
+                                            marginRight: '10px',
+                                            width: '24px',
+                                            }}
+                                        />
+                                        <span>{option.login}</span>
+                                        </Link>
+                                        </>
+                                    )}
+                                    />
                             </div>
                         </div>
                         <div className="col-md-3">
@@ -231,7 +253,6 @@ const Header = () => {
                                     <>
                                         <Link
                                             to={"/" + any_dir + "Wishlist"}
-                                            href="wishlist.html"
                                             className="btn wishlist"
                                         >
                                             <i className="fa fa-heart"></i>

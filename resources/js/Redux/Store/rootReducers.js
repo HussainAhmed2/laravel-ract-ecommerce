@@ -9,6 +9,7 @@ import {
     fetchOrderReducer,
 } from "../Reducers/Order.Reducers";
 import {
+    GetProductbyNameReducer,
     GetProductReducer,
     GetSingleProductReducer,
     ProductRatingReducer,
@@ -29,6 +30,11 @@ const persistCartConfig = {
 
 const persistWishlistConfig = {
     key: "whistelist",
+    storage: storage,
+};
+
+const persistSingleProductConfig = {
+    key: "single_product",
     storage: storage,
 };
 
@@ -56,8 +62,9 @@ const rootReducers = combineReducers({
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
     USER_WISHLIST: persistReducer(persistWishlistConfig, fetchUserWishlistReducer),
-    SINGLE_PRODUCT: GetSingleProductReducer,
+    SINGLE_PRODUCT:persistReducer(persistSingleProductConfig, GetSingleProductReducer),
     PRODUCT_RATING: ProductRatingReducer,
+    SEARCHED_PRODUCT: GetProductbyNameReducer
 
 });
 

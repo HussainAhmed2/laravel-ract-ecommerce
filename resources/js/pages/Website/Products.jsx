@@ -19,15 +19,7 @@ const Products = () => {
     const userid = User.user.id;
     const token = User?.token;
 
-    const fetchMoreData = () => {
-        // a fake async api call like which sends
-        // 20 more records in 1.5 secs
-        setTimeout(() => {
-            this.setState({
-                items: this.state.items.concat(Array.from({ length: 20 })),
-            });
-        }, 1500);
-    };
+
     React.useEffect(() => {
         dispatch(fetchProductAction()).then(() => {
             setIsloaded(true);
