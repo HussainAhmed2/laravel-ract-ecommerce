@@ -8,21 +8,24 @@ import Breadcrumbs from "./components/Breadcrumbs";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import { AddCart } from "../../Redux/Actions/Cart.Actions";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ProductDetails = () => {
+    const { Product } = useSelector((state) => state.SINGLE_PRODUCT);
     const { message } = useSelector((state) => state.PRODUCT_RATING.Validation);
+    const { productID } = useParams();
     const appUrl = process.env.MIX_APP_URL || "";
-    console.log("message" ,message)
+    let any_dir = process.env.MIX_SUB_DIR || "";
     const startScript = () => {
         const script = document.createElement("script");
         script.src = appUrl + "public/WebsiteAssets/js/main.js";
         document.body.appendChild(script);
     };
-    const { Product } = useSelector((state) => state.SINGLE_PRODUCT);
+
     const [isloaded, setIsloaded] = React.useState(false);
     const [isSubmitRating, setisSubmitRating] = React.useState(false);
     const dispatch = useDispatch();
-    const { productID } = useParams();
+   const history = useHistory()
     const url = process.env.MIX_APP_URL || "";
     const [Name,SetName] = React.useState("")
     const [Email,SetEmail] = React.useState("")
@@ -35,7 +38,7 @@ const ProductDetails = () => {
     const SubmitRating = (e) =>{
         e.preventDefault()
 
-        setisSubmitRating(true)
+
         const postData = new FormData();
         postData.append("product_id",productID)
         postData.append("name",Name)
@@ -43,25 +46,34 @@ const ProductDetails = () => {
         postData.append("review",Review)
         postData.append("rating",Rating)
 
+
+
         dispatch(storeProductRatingAction(postData)).then(()=>{
-            setisSubmitRating(false)
+            setisSubmitRating(true)
+            window.location.href = "/" + any_dir + "ProductDetails/" + productID
         })
+
     }
 
+
+
     React.useEffect(() => {
+        let abortController = new AbortController();
+        startScript();
         dispatch(getSingleProductAction(productID)).then(() => {
             setIsloaded(true);
+
         });
-        startScript();
 
-
-
-    }, [productID, isloaded,isSubmitRating]);
-    React.useEffect(() => {
         return () => {
-            dispatch(RatingremoveValidationErrors())
-          };
-    },[]);
+            abortController.abort(()=>{
+
+            });
+
+
+            }
+    }, [productID,isloaded]);
+
     return (
         <>
             <Header />
@@ -105,9 +117,7 @@ const ProductDetails = () => {
                                                 </div>
 
                                                 <div className="product-slider-single-nav normal-slider">
-                                                    {!isloaded ? <></> :
-                                                    <>
-                                                    </>}
+
                                                     {Product[0].priduct_images.map(
                                                         (product, index) => (
                                                             <div

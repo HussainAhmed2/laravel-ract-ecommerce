@@ -62,7 +62,7 @@ const rootReducers = combineReducers({
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
     USER_WISHLIST: persistReducer(persistWishlistConfig, fetchUserWishlistReducer),
-    SINGLE_PRODUCT:persistReducer(persistSingleProductConfig, GetSingleProductReducer),
+    SINGLE_PRODUCT: GetSingleProductReducer,
     PRODUCT_RATING: ProductRatingReducer,
     SEARCHED_PRODUCT: GetProductbyNameReducer
 
