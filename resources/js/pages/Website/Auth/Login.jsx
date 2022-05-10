@@ -144,7 +144,7 @@ const Login = () => {
                                         <label>Password</label>
                                         <input
                                             className="form-control"
-                                            type="text"
+                                            type="password"
                                             placeholder="Password"
                                             onChange={(e) =>
                                                 setRegisterPassword(
@@ -188,7 +188,7 @@ const Login = () => {
                                         <label>Password</label>
                                         <input
                                             className="form-control"
-                                            type="text"
+                                            type="password"
                                             placeholder="Password"
                                             onChange={(e) =>
                                                 setLoginPassword(e.target.value)
