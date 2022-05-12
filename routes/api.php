@@ -27,6 +27,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('user/getOrders/{user_id}', [UserController::class, 'getOrders']);
     Route::get('user/getUserWhislist/{user_id}', [UserController::class, 'getUserWhislist']);
     Route::get('user/deleteCartItem/{id}', [UserController::class, 'deleteCartItem']);
+
+
+    //Admin
+    Route::post('admin/storeProduct', [ProductController::class, 'storeProduct']);
 });
 
 Route::post('auth/login', [AuthController::class, 'ApiLogin']);

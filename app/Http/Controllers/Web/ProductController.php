@@ -37,7 +37,7 @@ class ProductController extends Controller
 
     public function getSingleProduct($id)
     {
-        $data = Product::With(['category', 'brand', "ProductRating.product", "PriductImages.product"])
+        $data = Product::With(['category', 'brand', "ProductRating", "PriductImages"])
 
             ->Join('product__ratings', 'product__ratings.product_id', 'products.id')
 

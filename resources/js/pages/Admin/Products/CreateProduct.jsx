@@ -1,9 +1,106 @@
 import React,{useState} from 'react'
 import AdminHeader from '../Components/AdminHeader'
+import { RMIUploader } from "react-multiple-image-uploader";
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const CreateProduct = () => {
 
- const [getDescription,setDescription] = useState();
+    const dataSources = [
+        {
+          id: 1,
+          dataURL: "https://picsum.photos/seed/1/600",
+        },
+        {
+          id: 2,
+          dataURL: "https://picsum.photos/seed/2/600",
+        },
+        {
+          id: 3,
+          dataURL: "https://picsum.photos/seed/3/600",
+        },
+        {
+          id: 4,
+          dataURL: "https://picsum.photos/seed/4/600",
+        },
+        {
+          id: 5,
+          dataURL: "https://picsum.photos/seed/5/600",
+        },
+        {
+          id: 6,
+          dataURL: "https://picsum.photos/seed/6/600",
+        },
+        {
+          id: 7,
+          dataURL: "https://picsum.photos/seed/7/600",
+        },
+        {
+          id: 8,
+          dataURL: "https://picsum.photos/seed/8/600",
+        },
+        {
+          id: 9,
+          dataURL: "https://picsum.photos/seed/9/600",
+        },
+        {
+          id: 10,
+          dataURL: "https://picsum.photos/seed/10/600",
+        },
+      ];
+
+
+const [uploadedImage,setUploadedImages] = React.useState([]);
+
+const [productImage,setProductImage]         =      React.useState("");
+const [productName,setProductName]           =      React.useState("");
+const [productPrice,setProductPrice]         =      React.useState("");
+const [productQTY,setProductQTY]             =      React.useState("");
+const [categoryID,setCategoryID]             =      React.useState("");
+const [brandID,setBrandID]                   =      React.useState("");
+const [description,setDescription]           =      React.useState("");
+
+const history                                =      useHistory()
+const dispatch                               =      useDispatch()
+
+
+const SubmitCreateProduct = () => {
+
+    const postData = new FormData()
+    postData.append('product_image',productImage)
+    postData.append('product_name',productName)
+    postData.append('product_price',productPrice)
+    postData.append('product_qty',productQTY)
+    postData.append('category_id',categoryID)
+    postData.append('brand_id',brandID)
+    postData.append('description',description)
+
+    postData.append('description',description)
+
+
+}
+
+
+
+
+      const [visible, setVisible] = useState(false);
+      const handleSetVisible = () => {
+        setVisible(true);
+      };
+      const hideModal = () => {
+        setVisible(false);
+      };
+      const onUpload = (data) => {
+        setUploadedImages(data)
+      };
+      const onSelect = (data) => {
+        console.log("Select files", data);
+      };
+      const onRemove = (id) => {
+        console.log("Remove image id", id);
+      };
+
+
 
   const Description = (e) =>{
     setDescription(e.target.value);
@@ -64,6 +161,17 @@ const CreateProduct = () => {
 
                   </textarea>
                     </div>
+                    <div className="App">
+                    {/* <button onClick={handleSetVisible}>Show Me</button> */}
+                        <RMIUploader
+                            isOpen={visible}
+                            hideModal={hideModal}
+                            onSelect={onSelect}
+                            onUpload={onUpload}
+                            onRemove={onRemove}
+                            dataSources={dataSources}
+                        />
+                        </div>
                     <button  className="btn btn-primary me-2" onClick={Submit}>Submit</button>
                     <button className="btn btn-light">Cancel</button>
                   </form>

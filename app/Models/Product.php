@@ -11,6 +11,8 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $table = 'products';
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -21,7 +23,7 @@ class Product extends Model
     }
     public function ProductRating()
     {
-        return $this->hasMany(Product_Rating::class, 'product_id', 'id');
+        return $this->hasMany('App\Models\Product_Rating', 'product_id', 'id');
     }
     public function PriductImages()
     {

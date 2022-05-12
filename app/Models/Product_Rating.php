@@ -10,8 +10,10 @@ class Product_Rating extends Model
 
     use HasFactory;
 
+    protected $table = 'product__ratings';
+
     public function Product()
     {
-        return $this->belongsTo(Product_Rating::class, Product::class);
+        return $this->belongsTo('App\Models\Product_Rating', 'product_id');
     }
 }
