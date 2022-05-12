@@ -14,7 +14,7 @@ class AddNewFieldsInOrderTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->longText('address')->after('order_id');
+            $table->longText('address')->after('user_id');
             $table->string('country')->after('address');
             $table->string('city')->after('country');
             $table->string('state')->after('city');

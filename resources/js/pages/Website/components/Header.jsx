@@ -8,9 +8,10 @@ import {
 } from "../../../Redux/Actions/User.Actions";
 import Swal from "sweetalert2";
 import { AsyncTypeahead, Typeahead } from "react-bootstrap-typeahead";
-import { SearchProductByNameAction } from "../../../Redux/Actions/Product.Actions";
+import { getSingleProductAction, SearchProductByNameAction } from "../../../Redux/Actions/Product.Actions";
 import { range } from "lodash";
 import apiClient from "../../../config/endpoints";
+import { AdminlogOutAction } from "../../../Redux/Actions/Admin/Admin.Actions";
 
 const Header = () => {
 
@@ -34,7 +35,6 @@ const Header = () => {
         const script = document.createElement("script");
         script.src = url + "public/WebsiteAssets/js/main.js";
         document.body.appendChild(script);
-        console.log(script);
     };
     const options1 = range(0, 1000).map((o) => `Item ${o}`);
     const [paginate, setPaginate] = React.useState(true);
@@ -50,27 +50,36 @@ const Header = () => {
                 login: i.product_name,
               }));
 
-             console.log("res",res.data)
+             console.log("Fetch product Response res",res.data)
              setOptions(options);
+
         })
 
+        setIsLoading(false);
 
 
 
-            setIsLoading(false);
 
       };
       const goToProducts = (product_id) =>{
+          dispatch(getSingleProductAction(product_id)).then(()=>{
 
-          window.location.href = "/" + any_dir + "ProductDetails/" + product_id
+            //history.push( "/" + any_dir + `ProductDetails/${product_id}`)
+            window.location.href = "/" + any_dir + "ProductDetails/" + product_id
+
+          })
+        //   window.location.href = "/" + any_dir + "ProductDetails/" + product_id
 
       }
 
     useEffect(() => {
         startScript();
-        dispatch(fetchUserWishlistAction(token, userid)).then(() => {
-            setIsWishlistloaded(true);
-        });
+        if(token){
+            dispatch(fetchUserWishlistAction(token, userid)).then(() => {
+                setIsWishlistloaded(true);
+            });
+        }
+
 
     }, [isWishlistloaded,isLoading]);
     return (
@@ -149,7 +158,7 @@ const Header = () => {
                                                     )
                                                 ) {
                                                     dispatch(
-                                                        logOutAction(history)
+                                                        AdminlogOutAction(history)
                                                     );
                                                 }
                                             }}

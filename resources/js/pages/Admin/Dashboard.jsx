@@ -1,10 +1,23 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import AdminFooter from "./Components/AdminFooter";
 import AdminHeader from "./Components/AdminHeader";
 
 const Dashboard = () => {
+    const { Admin } = useSelector((state) => state.ADMIN_LOGIN);
+    const token = Admin?.token;
+    let any_dir = process.env.MIX_SUB_DIR || "";
     const appUrl = process.env.MIX_APP_URL || "";
-
+    const history = useHistory();
+    const auth = () => {
+        if (!token) {
+            history.push("/" + any_dir + "admin/login");
+        }
+    };
+    React.useEffect(() => {
+        auth();
+    }, [ token]);
     return (
         <>
 

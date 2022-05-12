@@ -71,6 +71,7 @@ function Main() {
                         path={"/" + any_dir + "MyAccount"}
                         component={MyAccount}
                     />
+
                     <Route
                         exact
                         path={"/" + any_dir + "Wishlist"}

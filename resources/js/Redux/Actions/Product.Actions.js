@@ -63,7 +63,7 @@ export const getSingleProductAction = (product_id) => async (dispatch) => {
                 payload: res.data,
             });
         })
-        .catch((error) => console.error("fetch product Error", error.response));
+        .catch((error) => console.error("fetch single  product Error", error));
 };
 
 export const storeProductRatingAction =

@@ -1,7 +1,43 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { admin_login } from "../../../Redux/Actions/Admin/Admin.Actions";
 
 const AdminLogin = () => {
     const url = process.env.MIX_APP_URL || "";
+
+    const { Admin } = useSelector((state) => state.ADMIN_LOGIN);
+    const token = Admin?.token;
+    let any_dir = process.env.MIX_SUB_DIR || "";
+    const [LoginEmail, setLoginEmail] = React.useState();
+    const [LoginPassword, setLoginPassword] = React.useState();
+    const [isSubmit, setIsSubmit] = React.useState(false);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+
+    const auth = () => {
+        if (token) {
+            history.push("/" + any_dir + "admin/Dashboard");
+        }
+    };
+
+    const SubmitLogin = (e) => {
+        e.preventDefault();
+        setIsSubmit(true);
+        const postData = new FormData();
+        postData.append("email", LoginEmail);
+        postData.append("password", LoginPassword);
+        dispatch(admin_login(postData, history)).then(() => {
+            setIsSubmit(false);
+        });
+    };
+
+
+    React.useEffect(() => {
+        auth();
+    }, [isSubmit, token]);
+
     return (
         <>
             <div className="container-fluid page-body-wrapper full-page-wrapper">
@@ -28,7 +64,10 @@ const AdminLogin = () => {
                                             type="email"
                                             className="form-control form-control-lg"
                                             id="exampleInputEmail1"
-                                            placeholder="Username"
+                                            placeholder="Enter Email"
+                                            onChange={(e) =>
+                                                setLoginEmail(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <div className="form-group">
@@ -37,15 +76,18 @@ const AdminLogin = () => {
                                             className="form-control form-control-lg"
                                             id="exampleInputPassword1"
                                             placeholder="Password"
+                                            onChange={(e) =>
+                                                setLoginPassword(e.target.value)
+                                            }
                                         />
                                     </div>
                                     <div className="mt-3">
-                                        <a
+                                        <button type="button"
                                             className="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                            href="../../index.html"
+                                          onClick={SubmitLogin}
                                         >
                                             SIGN IN
-                                        </a>
+                                      </button>
                                     </div>
                                     <div className="my-2 d-flex justify-content-between align-items-center">
                                         <div className="form-check">

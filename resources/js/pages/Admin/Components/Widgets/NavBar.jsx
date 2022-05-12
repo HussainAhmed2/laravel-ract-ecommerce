@@ -1,7 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { AdminlogOutAction } from "../../../../Redux/Actions/Admin/Admin.Actions";
 
 const NavBar = () => {
     const appUrl = process.env.MIX_APP_URL || "";
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     return (
         <>
             <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -150,10 +156,22 @@ const NavBar = () => {
                                     <i className="ti-settings text-primary"></i>
                                     Settings
                                 </a>
-                                <a className="dropdown-item">
+                                <button className="dropdown-item"
+                                  onClick={() => {
+                                    if (
+                                        window.confirm(
+                                            "Do You Want To Logout?"
+                                        )
+                                    ) {
+                                        dispatch(
+                                            AdminlogOutAction(history)
+                                        );
+                                    }
+                                }}
+                                >
                                     <i className="ti-power-off text-primary"></i>
                                     Logout
-                                </a>
+                                </button>
                             </div>
                         </li>
                         <li className="nav-item nav-settings d-none d-lg-flex">

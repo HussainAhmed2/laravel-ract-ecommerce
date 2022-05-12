@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
+import { LoginAdminReducer } from "../Reducers/Admin/Admin.Reducers";
 import { CartReducers } from "../Reducers/Cart.Reducers";
 import { CheckoutPaymentReducer } from "../Reducers/Checkout.Reducers";
 import {
@@ -34,12 +35,26 @@ const persistWishlistConfig = {
 };
 
 const persistSingleProductConfig = {
-    key: "single_product",
+    key: "SINGLE_PRODUCT",
     storage: storage,
 };
 
 const persistAuthConfig = {
     key: "auth",
+    storage: storage,
+    transforms: [
+        encryptTransform({
+            secretKey: "my-super-secret-key",
+            onError: function (error) {
+                console.log("Error in auth config", error);
+            },
+        }),
+    ],
+};
+
+
+const persistAdminAuthConfig = {
+    key: "adminAuth",
     storage: storage,
     transforms: [
         encryptTransform({
@@ -62,9 +77,12 @@ const rootReducers = combineReducers({
     SINGLE_ORDER: fetchOrderReducer,
     USER_ORDERS: fetchUserOrderReducer,
     USER_WISHLIST: persistReducer(persistWishlistConfig, fetchUserWishlistReducer),
-    SINGLE_PRODUCT: GetSingleProductReducer,
+    SINGLE_PRODUCT:   GetSingleProductReducer ,
     PRODUCT_RATING: ProductRatingReducer,
-    SEARCHED_PRODUCT: GetProductbyNameReducer
+    SEARCHED_PRODUCT: GetProductbyNameReducer,
+
+    //ADMIN
+    ADMIN_LOGIN: persistReducer(persistAdminAuthConfig, LoginAdminReducer),
 
 });
 

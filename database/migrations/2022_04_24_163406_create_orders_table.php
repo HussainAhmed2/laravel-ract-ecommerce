@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_no');
             $table->integer('order_amount');
             $table->enum('order_status', array(0, 1, 2, 3, 4))->default(1);
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->softDeletes();

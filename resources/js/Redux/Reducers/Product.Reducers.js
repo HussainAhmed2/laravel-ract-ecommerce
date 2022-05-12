@@ -58,8 +58,7 @@ export const GetProductReducer = (state = {}, { type, payload }) => {
             return { ...state, Products: payload };
         case ProductTypes.GET_PRODUCTS:
             return { ...state, Products: payload };
-        case ProductTypes.GET_SINGLE_PRODUCT:
-            return { ...state, Product: payload };
+
 
         default:
             return state;
