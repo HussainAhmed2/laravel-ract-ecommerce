@@ -10,10 +10,12 @@ const CreateProduct = () => {
         {
           id: 1,
           dataURL: "https://picsum.photos/seed/1/600",
+          image_name : "product-1.jpg"
         },
         {
           id: 2,
           dataURL: "https://picsum.photos/seed/2/600",
+          image_name : "product-2.jpg"
         },
         {
           id: 3,

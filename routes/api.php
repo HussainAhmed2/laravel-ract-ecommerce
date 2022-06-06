@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 
     //Admin
-    Route::post('admin/storeProduct', [ProductController::class, 'storeProduct']);
+
 });
 
 Route::post('auth/login', [AuthController::class, 'ApiLogin']);
@@ -40,3 +40,4 @@ Route::get('getSingleProduct/{id}', [WebProductController::class, 'getSingleProd
 Route::post('productRating', [WebProductController::class, 'product_rating']);
 Route::get('searchProducts/{name}', [WebProductController::class, 'searchProducts']);
 
+Route::post('admin/storeProduct', [ProductController::class, 'storeProduct']);

@@ -1,7 +1,7 @@
 import { AdminTypes } from "../../Types/Admin/Admin.Types";
 import storage from "redux-persist/lib/storage";
 import apiClient from "../../../config/admin_endpoints";
-
+import Swal from "sweetalert2";
 
 export const admin_login = (postData, history) => async (dispatch) => {
     await apiClient

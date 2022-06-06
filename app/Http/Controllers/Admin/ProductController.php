@@ -25,7 +25,7 @@ class ProductController extends Controller
         }
 
         $product = new Product();
-        $product->product_image         =       $request->$imageName;
+        $product->product_image         =       $imageName;
         $product->product_name          =       $request->product_name;
         $product->product_price         =       $request->product_price;
         $product->product_qty           =       $request->product_qty;
@@ -35,15 +35,12 @@ class ProductController extends Controller
         $product->save();
 
         $Product_Images_array           = array();
-       // $User_Images_array              = array();
-        $images_count                   = count($request->product_id);
 
-        for ($i = 0; $i < $images_count; $i++) {
-            $imageName = null;
-            $imageName = time().'.'.$request->product_images[$i]->extension();
-            $request->product_images[$i]->move(public_path('uploads/images'), $imageName);
-            $Product_Images_array[]  =  array("product_id" => $product->id,  "image" => $imageName);
-          //  $Product_Images_array[]  =  array("user_id" => $request->user_id,  "image" => $imageName);
+        if($request->product_images)
+        {
+            foreach($request->product_images as $key => $data) {
+                $Product_Images_array[]  =  array("product_id" => $product->id,  "image" => $request->product_images[$key]);
+            }
         }
 
         DB::table('product_images')->insert($Product_Images_array);
@@ -53,8 +50,18 @@ class ProductController extends Controller
             "order" => $product
         ], 200);
 
+    }
 
-
+    public function uploadMediaImages (Request $request){
+        $Media_Images_array           = array();
+        if($request->has('media_images')){
+            foreach($request->file('media_images') as $key => $data) {
+                $imageName = null;
+                $imageName = time().'.'.$request->media_images[$key]->extension();
+                $request->media_images[$key]->move(public_path('uploads/images'), $imageName);
+                $Media_Images_array[]  =  array("user_id" => $request->user_id,  "image" => $imageName);
+            }
+        }
     }
 
 }
