@@ -11,11 +11,22 @@ const storeProduct = (token, postData) =>
     });
 
 
+    const fetchMediaImages = (token, userid) =>
+apiClient.get(`admin/getMediaImages/${userid}`, {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
+
+
 export default {
     //login EndPoints
     login,
 
     //Product
-    storeProduct
+    storeProduct,
+
+
+    fetchMediaImages,
 
 };

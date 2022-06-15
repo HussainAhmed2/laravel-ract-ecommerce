@@ -13,7 +13,7 @@ class CreateUserUploadedImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_uploaded_images', function (Blueprint $table) {
+        Schema::create('media_images', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->integer('user_id');
             $table->string('image');

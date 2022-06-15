@@ -25,7 +25,7 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Product_Rating', 'product_id', 'id');
     }
-    public function PriductImages()
+    public function ProductImages()
     {
         return $this->hasMany(product_images::class, 'product_id', 'id');
     }

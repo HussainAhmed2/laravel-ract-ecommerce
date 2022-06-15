@@ -50,6 +50,13 @@ class User extends Authenticatable
             Order::class
         );
     }
+
+    public function media_images()
+    {
+        return $this->hasMany(
+            MediaImages::class,"id","user_id"
+        );
+    }
     public function wishlists()
     {
         return $this->hasMany(

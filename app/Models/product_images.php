@@ -12,4 +12,8 @@ class product_images extends Model
     {
         return $this->belongsTo(product_images::class, Product::class);
     }
+    public function media_image()
+    {
+        return $this->hasOne(MediaImages::class,'id','image_id');
+    }
 }

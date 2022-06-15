@@ -4,6 +4,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import storage from "redux-persist/lib/storage";
 import { adminStoreProduct } from "../Actions/Admin/AdminProductActions";
 import { LoginAdminReducer } from "../Reducers/Admin/Admin.Reducers";
+import { AdminMediaImagesReducer } from "../Reducers/Admin/AdminMediaImages.Reducers";
 import { CartReducers } from "../Reducers/Cart.Reducers";
 import { CheckoutPaymentReducer } from "../Reducers/Checkout.Reducers";
 import {
@@ -84,7 +85,8 @@ const rootReducers = combineReducers({
 
     //ADMIN
     ADMIN_LOGIN: persistReducer(persistAdminAuthConfig, LoginAdminReducer),
-    CREATE_PRODUCT : adminStoreProduct
+    CREATE_PRODUCT : adminStoreProduct,
+    MEDIA_IMAGES : AdminMediaImagesReducer
 
 });
 

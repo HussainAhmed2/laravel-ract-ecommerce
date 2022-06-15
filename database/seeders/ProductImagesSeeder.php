@@ -18,7 +18,7 @@ class ProductImagesSeeder extends Seeder
         for ($i = 0; $i <= 800; $i++) {
             DB::table('product_images')->insert([
                 'product_id' => random_int(1, 200),
-                'image' => 'product' . '-' . random_int(1, 10) . '.jpg',
+                'image_id' =>  random_int(1, 10),
             ]);
         }
     }

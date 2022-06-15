@@ -13,7 +13,7 @@ class UserAndImagesRelation extends Migration
      */
     public function up()
     {
-        Schema::table('user_uploaded_images', function (Blueprint $table) {
+        Schema::table('media_images', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -25,7 +25,7 @@ class UserAndImagesRelation extends Migration
      */
     public function down()
     {
-        Schema::table('user_uploaded_images', function (Blueprint $table) {
+        Schema::table('media_images', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\MediaImages;
 use App\Models\Product;
 use App\Models\ProductRating;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class ProductController extends Controller
 
         $data = Product::all();
 
-        return json_decode($data);
+        return json_encode($data);
     }
     public function storeProduct (Request $request) {
         $imageName = null;
@@ -34,12 +35,12 @@ class ProductController extends Controller
         $product->description           =       $request->description;
         $product->save();
 
-        $Product_Images_array           = array();
+        $Product_Images_array           =        array();
 
         if($request->product_images)
         {
             foreach($request->product_images as $key => $data) {
-                $Product_Images_array[]  =  array("product_id" => $product->id,  "image" => $request->product_images[$key]);
+                $Product_Images_array[]  =  array("product_id" => $product->id,  "image_id" => $request->product_images[$key]);
             }
         }
 
@@ -52,16 +53,5 @@ class ProductController extends Controller
 
     }
 
-    public function uploadMediaImages (Request $request){
-        $Media_Images_array           = array();
-        if($request->has('media_images')){
-            foreach($request->file('media_images') as $key => $data) {
-                $imageName = null;
-                $imageName = time().'.'.$request->media_images[$key]->extension();
-                $request->media_images[$key]->move(public_path('uploads/images'), $imageName);
-                $Media_Images_array[]  =  array("user_id" => $request->user_id,  "image" => $imageName);
-            }
-        }
-    }
 
 }

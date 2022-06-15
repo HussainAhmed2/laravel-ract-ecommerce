@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MediaImagesController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Web\CheckoutController as WebCheckoutController;
@@ -30,6 +31,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 
     //Admin
+    Route::post('admin/storeProduct', [ProductController::class, 'storeProduct']);
+    Route::get('admin/getMediaImages/{user_id}', [MediaImagesController::class, 'getMediaImages']);
+    Route::post('admin/storeMediaImages', [MediaImagesController::class, 'uploadMediaImages']);
 
 });
 
@@ -40,4 +44,6 @@ Route::get('getSingleProduct/{id}', [WebProductController::class, 'getSingleProd
 Route::post('productRating', [WebProductController::class, 'product_rating']);
 Route::get('searchProducts/{name}', [WebProductController::class, 'searchProducts']);
 
-Route::post('admin/storeProduct', [ProductController::class, 'storeProduct']);
+
+
+

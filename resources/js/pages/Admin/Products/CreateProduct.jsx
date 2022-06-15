@@ -2,9 +2,20 @@ import React,{useState} from 'react'
 import AdminHeader from '../Components/AdminHeader'
 import { RMIUploader } from "react-multiple-image-uploader";
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector } from 'react-redux';
+import { AdminfetchMediaImagesAction } from '../../../Redux/Actions/Admin/AdminMediaImage.Actions';
 
 const CreateProduct = () => {
+
+    const { Admin } = useSelector((state) => state.ADMIN_LOGIN);
+
+    const { MediaImages } = useSelector((state) => state.MEDIA_IMAGES);
+    const[getMediaImages,SetMediaImages] = React.useState([])
+    const [loadMediaImages , setloadMediaImages] = React.useState(false)
+    const userid = Admin.user.id;
+    const token = Admin?.token;
+    const url = process.env.MIX_APP_URL || "";
+  console.log("mediaimage",MediaImages)
 
     const dataSources = [
         {
@@ -66,6 +77,7 @@ const history                                =      useHistory()
 const dispatch                               =      useDispatch()
 
 
+
 const SubmitCreateProduct = () => {
 
     const postData = new FormData()
@@ -115,6 +127,13 @@ const SubmitCreateProduct = () => {
     console.log(iframe.contentDocument.body.innerHTML);
   }
 
+  React.useEffect(()=>{
+      dispatch(AdminfetchMediaImagesAction(token,userid)).then(()=>{
+        setloadMediaImages(true)
+        SetMediaImages({id:MediaImages.id, dataURL:url+MediaImages.image})
+      })
+    console.log("loaded images",getMediaImages)
+  },[loadMediaImages])
     return (
         <>
             <div className="container-scroller">
@@ -163,17 +182,21 @@ const SubmitCreateProduct = () => {
 
                   </textarea>
                     </div>
-                    <div className="App">
-                    {/* <button onClick={handleSetVisible}>Show Me</button> */}
+                   {!loadMediaImages ? "Loading..." :
+                    <>
+                      <div className="App">
+                    <button onClick={handleSetVisible}>Show Me</button>
                         <RMIUploader
                             isOpen={visible}
                             hideModal={hideModal}
                             onSelect={onSelect}
                             onUpload={onUpload}
                             onRemove={onRemove}
-                            dataSources={dataSources}
+                            dataSources={MediaImages}
                         />
                         </div>
+                    </>}
+
                     <button  className="btn btn-primary me-2" onClick={Submit}>Submit</button>
                     <button className="btn btn-light">Cancel</button>
                   </form>

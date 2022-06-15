@@ -128,7 +128,7 @@ const ProductDetails = () => {
                                       <div className="col-md-5">
 
                                           <div className="product-slider-single normal-slider">
-                                              {Product[0].priduct_images.map(
+                                              {Product[0].product_images.map(
                                                   (product, index) => (
                                                       <div
                                                           className="slider-nav-img"
@@ -138,7 +138,7 @@ const ProductDetails = () => {
                                                               src={
                                                                   url +
                                                                   "public/uploads/images/" +
-                                                                  product.image
+                                                                  product.media_image.image
                                                               }
                                                               alt="Product Image"
                                                           />
@@ -149,7 +149,7 @@ const ProductDetails = () => {
 
                                           <div className="product-slider-single-nav normal-slider">
 
-                                              {Product[0].priduct_images.map(
+                                              {Product[0].product_images.map(
                                                   (product, index) => (
                                                       <div
                                                           className="slider-nav-img"
@@ -159,7 +159,7 @@ const ProductDetails = () => {
                                                               src={
                                                                   url +
                                                                   "public/uploads/images/" +
-                                                                  product.image
+                                                                  product.media_image.image
                                                               }
                                                               alt="Product Image"
                                                           />

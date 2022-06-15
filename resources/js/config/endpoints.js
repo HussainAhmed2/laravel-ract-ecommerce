@@ -76,6 +76,13 @@ const productSearchByName = (name) =>
 
 const paymenyPay = (postData) => apiClient.get("checkout", postData);
 
+const getMediaImages = (token, userid) =>
+apiClient.get(`admin/getMediaImages/${userid}`, {
+    headers: {
+        Authorization: `Bearer ${token}`,
+    },
+});
+
 export default {
     //Website EndPoints
     login,
@@ -92,4 +99,7 @@ export default {
     getSingleProduct,
     submitProductRating,
     productSearchByName,
+
+    //Admin
+    getMediaImages,
 };
